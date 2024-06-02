@@ -5,7 +5,7 @@
 # Read `man 5 sway` for a complete reference.
 
 ### Colors
-include ./catppuccin-macchiato
+include ./catppuccin-mocha
 client.focused           $lavender $base $text  $rosewater $lavender
 client.focused_inactive  $overlay0 $base $text  $rosewater $overlay0
 client.unfocused         $overlay0 $base $text  $rosewater $overlay0
@@ -13,8 +13,10 @@ client.urgent            $peach    $base $peach $overlay0  $peach
 client.placeholder       $overlay0 $base $text  $overlay0  $overlay0
 client.background        $base
 
+font pango:NotoSans Nerd Font 11
+
 gaps inner 8
-default_border pixel 1
+default_border none 0
 
 ### Variables
 #
@@ -91,7 +93,10 @@ input "5426:92:Razer_Razer_DeathAdder_Elite" {
     bindsym $mod+Shift+q kill
 
     # Start your launcher
-    bindsym $mod+d exec $menu
+    bindsym $mod+d exec ~/.config/rofi/launcher.sh
+
+    # Power Manager
+    bindsym $mod+Super_L exec ~/.config/rofi/powermenu.sh
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
