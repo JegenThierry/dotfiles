@@ -38,7 +38,7 @@ set $menu fuzzel
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 output * bg /home/thierry/MEGA/Pictures/Wallpaper/catppucin_upscayl_2x_realesrgan-x4plus.png fill
-output "Dell Inc. DELL S2721DGF D60L093" mode "2560x1440@165Hz" position 0,0
+output "HP Inc. HP X34 6CM2511W9G" mode "3440x1440@165Hz" position 0,0
 
 # Example configuration:
 #
@@ -60,11 +60,12 @@ output "Dell Inc. DELL S2721DGF D60L093" mode "2560x1440@165Hz" position 0,0
 # resumed. It will also lock your screen before your computer goes to sleep.
 
 ### Input configuration
-input "1:1:AT_Translated_Set_2_keyboard" {
+input "12136:130:Hoksi_Technology_DURGOD_Taurus_K320" {
     xkb_layout us
+    xkb_variant "altgr-intl"
 }
 
-input "5426:92:Razer_Razer_DeathAdder_Elite" {
+input "1133:16500:Logitech_G305" {
     accel_profile "flat" # disable mouse acceleration (enabled by default; to set it manually, use "adaptive" instead of "flat")
     pointer_accel 0.5 # set mouse sensitivity (between -1 and 1)
 }
@@ -97,6 +98,9 @@ input "5426:92:Razer_Razer_DeathAdder_Elite" {
 
     # Power Manager
     bindsym $mod+Super_L exec ~/.config/rofi/powermenu.sh
+    
+    # Make a Screenshot and copy it to the clipboard
+    bindsym $mod+p exec grim -g "$(slurp -d)" - | wl-copy
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.

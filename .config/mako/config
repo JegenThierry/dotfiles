@@ -1,7 +1,9 @@
-background-color=#1E1D2F
-text-color=#D9E0EE
-border-color=#96CDFB
-progress-color=over #302D41
-font=Iosevka Nerd Font 12
+# Colors
+
+background-color=#1e1e2e
+text-color=#cdd6f4
+border-color=#89b4fa
+progress-color=over #313244
+
 [urgency=high]
-border-color=#F8BD96
+border-color=#fab387

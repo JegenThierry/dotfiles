@@ -2,9 +2,6 @@
   "modules-left": [
     "sway/workspaces",
     "temperature",
-    "idle_inhibitor",
-    "mpd",
-    "custom/cava-internal",
   ],
   "modules-center": [
     "clock"

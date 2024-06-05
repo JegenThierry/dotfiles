@@ -24,7 +24,7 @@ window {
 
 prompt {
   enabled:                    true;
-  padding:                    0% 1% 0% -0.5%;
+  padding:                    0% 1% 0% 0%;
   background-color:           @al;
   text-color:                 #81A1C1;
   font:                       "NotoSans Nerd Font 16";
