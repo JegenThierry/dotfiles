@@ -25,3 +25,6 @@ makepkg -si
 ```
 yay -S waybar btop brighnessctl wlogout
 ```
+
+# Installation
+Move the files you want to your ```.config/``` folder.
