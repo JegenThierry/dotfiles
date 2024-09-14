@@ -82,7 +82,7 @@ mv ./nvim ~/.config/
 mv ./kitty ~/.config/
 mv ./waybar ~/.config/
 mv ./hypr ~/.config/
-mv .zshrc ~/
+mv zshrc ~/.zshrc
 ```
 
 ## Additional Tools
