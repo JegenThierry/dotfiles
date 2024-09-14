@@ -108,3 +108,6 @@ Copy Wallpaper to the designated place.
 mkdir ~/Pictures
 mv wallpapers ~/Pictures
 ```
+
+## Final Steps
+Open nwg-look and configure the rest of the looks to your liking there.
