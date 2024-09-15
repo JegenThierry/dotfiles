@@ -14,7 +14,8 @@ Setup yay AUR Manager:
 git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si
-rm -R ./yay
+cd ..
+rm -Rf ./yay
 ```
 
 Install software:
