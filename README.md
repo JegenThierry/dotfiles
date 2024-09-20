@@ -20,7 +20,7 @@ rm -Rf ./yay
 
 Install software:
 ```bash
-yay -S --noconfirm --needed gcc make ripgrep fd unzip neovim waybar btop brightnessctl wlogout ttf-ms-win11-auto vscodium-bin thunderbird thunar catppuccin-cursors-macchiato papirus-icon-theme gtk-engine-murrine gnome-themes-extra nwg-look hyprpaper polkit-gnome flatpak chromium vlc shotwell dotnet-sdk luarocks krita gimp inkscape
+yay -S --noconfirm --needed gcc make ripgrep fd unzip neovim waybar btop brightnessctl wlogout ttf-ms-win11-auto vscodium-bin thunderbird thunar catppuccin-cursors-macchiato papirus-icon-theme gtk-engine-murrine gnome-themes-extra nwg-look hyprpaper polkit-gnome flatpak chromium vlc shotwell dotnet-sdk luarocks krita gimp inkscape hyprshot
 ```
 
 If on Laptop the following is recommended:
