@@ -23,6 +23,11 @@ Install software:
 yay -S --noconfirm --needed gcc make ripgrep fd unzip neovim waybar btop brightnessctl wlogout ttf-ms-win11-auto vscodium-bin thunderbird thunar catppuccin-cursors-macchiato papirus-icon-theme gtk-engine-murrine gnome-themes-extra nwg-look hyprpaper polkit-gnome flatpak chromium vlc shotwell dotnet-sdk luarocks krita gimp inkscape hyprshot
 ```
 
+For an XFCE install
+```bash
+yay -S --noconfirm --needed gcc make ripgrep fd unzip neovim ttf-ms-win11-auto vscodium-bin megasync-bin thunderbird flatpak chromium vlc shotwell dotnet-sdk luarocks krita gimp inkscape
+```
+
 If on Laptop the following is recommended:
 ```bash
 yay -S --noconfirm --needed tlp tlp-rdw
