@@ -25,7 +25,7 @@ yay -S --noconfirm --needed gcc make ripgrep fd unzip neovim waybar btop brightn
 
 For a regular desktop install
 ```bash
-yay -S --noconfirm --needed gcc make ripgrep fd unzip neovim ttf-ms-win11-auto vscodium-bin megasync-bin thunderbird flatpak chromium vlc shotwell dotnet-sdk luarocks krita gimp inkscape albert docker docker-compose
+yay -S --noconfirm --needed gcc make ripgrep fd unzip neovim ttf-ms-win11-auto vscodium-bin thunderbird flatpak chromium vlc shotwell dotnet-sdk luarocks krita gimp inkscape albert docker docker-compose
 ```
 
 If on Laptop the following is recommended:
