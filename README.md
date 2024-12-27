@@ -135,3 +135,35 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 ```
 
 Personal Note: Download `.rpm` files from protondrive, to install other files that are only available via rpm download.
+
+### nvim config (Lazyvim: https://www.lazyvim.org/installation)
+
+Make a backup of your current Neovim files:
+
+```bash
+# required
+mv ~/.config/nvim{,.bak}
+
+# optional but recommended
+mv ~/.local/share/nvim{,.bak}
+mv ~/.local/state/nvim{,.bak}
+mv ~/.cache/nvim{,.bak}
+```
+
+Clone the starter
+
+```bash
+git clone https://github.com/LazyVim/starter ~/.config/nvim
+```
+
+Remove the `.git` folder, so you can add it to your own repo later:
+
+```bash
+rm -rf ~/.config/nvim/.git
+```
+
+Start nvim:
+
+```bash
+nvim
+```
