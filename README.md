@@ -167,3 +167,24 @@ Start nvim:
 ```bash
 nvim
 ```
+
+### Icons and Cursors
+
+Clone the colloid icon-theme:
+
+```bash
+https://github.com/vinceliuice/Colloid-icon-theme.git | cd Colloid-icon-theme
+```
+
+Install icons: 
+
+```bash
+./install.sh
+```
+
+Install cursors:
+
+```bash
+cd cursors | ./install.sh
+```
+
