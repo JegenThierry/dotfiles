@@ -1,119 +1,135 @@
-# Dotfiles Archlinux
+The following dotfiles are for a fresh install of Fedora Linux with the default Gnome desktop. Do note this is my personal way of configuring fedora and may differ from your personal preferences.
 
-The following dotfiles are for a fresh install of Arch Linux with the Hyprland desktop. This dotfile configuration expects you to have installed `hyprland` with the use of `archinstall`.
+## Cleanup
 
-## Dependencies
-
-Install the following packages:
-```bash
-sudo pacman -S --noconfirm --needed git curl vim zsh unzip 
-```
-
-Setup yay AUR Manager:
-```bash
-git clone https://aur.archlinux.org/yay.git
-cd yay
-makepkg -si
-cd ..
-rm -Rf ./yay
-```
-
-Install software:
-```bash
-yay -S --noconfirm --needed gcc make ripgrep fd unzip neovim waybar btop brightnessctl wlogout ttf-ms-win11-auto vscodium-bin thunderbird thunar catppuccin-cursors-macchiato papirus-icon-theme gtk-engine-murrine gnome-themes-extra nwg-look hyprpaper polkit-gnome flatpak chromium vlc shotwell dotnet-sdk luarocks krita gimp inkscape hyprshot docker docker-compose
-```
-
-For a regular desktop install
-```bash
-yay -S --noconfirm --needed gcc make ripgrep fd unzip neovim ttf-ms-win11-auto vscodium-bin thunderbird flatpak chromium vlc shotwell dotnet-sdk luarocks krita gimp inkscape albert docker docker-compose
-```
-
-If on Laptop the following is recommended:
-```bash
-yay -S --noconfirm --needed tlp tlp-rdw
-```
-
-Remove dolphin:
-```bash
-yay -R dolphin
-```
-
-## Flatpaks
+Uninstall the following programs with the following command:
 
 ```bash
-flatpak install com.discordapp.Discord org.telegram.desktop com.rawtherapee.RawTherapee com.usebottles.bottles com.github.tchx84.Flatseal org.remmina.Remmina
-flatpak update
+sudo dnf remove -y libreoffice-* gnome-tour mediawriter yelp
 ```
 
-## Fonts
+## Installing Programs
 
-```bash 
+Install the following programs:
+
+```bash
+sudo dnf install -y git curl vim zsh unzip gnome-tweaks gcc make ripgrep fd unzip neovim fzf shotwell dotnet-sdk-8.0 luarocks docker docker-compose curl cabextract xorg-x11-font-utils fontconfig
+```
+
+Install the following programs (with gaming):
+
+```bash
+sudo dnf install -y git curl vim zsh unzip gnome-tweaks gcc make ripgrep fd unzip neovim fzf shotwell dotnet-sdk-8.0 luarocks docker docker-compose steam curl cabextract xorg-x11-font-utils fontconfig
+```
+
+Install programs via flatpak:
+
+```bash
+flatpak install com.discordapp.Discord org.telegram.desktop com.github.tchx84.Flatseal org.remmina.Remmina md.obsidian.Obsidian com.mattjakeman.ExtensionManager
+```
+
+Install programs via flatpak (with gaming):
+
+```bash
+flatpak install com.discordapp.Discord org.telegram.desktop com.github.tchx84.Flatseal org.remmina.Remmina md.obsidian.Obsidian com.mattjakeman.ExtensionManager com.usebottles.bottles
+```
+
+## Adding Fonts
+
+I use JetBrainsMono Nerd Font as my font for coding.
+
+```bash
 mkdir ~/.fonts
 cd ~/.fonts
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/JetBrainsMono.zip
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/Noto.zip
 unzip ./JetBrainsMono.zip
-unzip ./Noto.zip
 rm ./*.zip
 cd
 ```
 
-## Theming
+Add some Windows fonts (Dependencies in the initial install command):
 
-Qogir-Dark Theme
 ```bash
-git clone https://github.com/vinceliuice/Qogir-theme.git
-cd Qogir-theme
-./install.sh
+sudo rpm -i https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
 ```
 
-## Configs
+Download additional fonts from (https://lexics.github.io/installing-ms-fonts)
 
-Remove old config files, to avoid conflicts.
+### Installing Microsoft ClearType Fonts
+
 ```bash
-rm -R ~/.config/nvim ~/.config/hypr ~/.config/waybar ~/.config/kitty
+wget -q -O - https://gist.githubusercontent.com/Blastoise/72e10b8af5ca359772ee64b6dba33c91/raw/2d7ab3caa27faa61beca9fbf7d3aca6ce9a25916/clearType.sh | bash
 ```
 
-Clone the git files
+### Installing Tahoma and Segoe-UI Fonts
+
 ```bash
-cd Downloads
-git clone https://github.com/JegenThierry/updated-dotfiles.git
-cd updated-dotfiles
+wget -q -O - https://gist.githubusercontent.com/Blastoise/b74e06f739610c4a867cf94b27637a56/raw/96926e732a38d3da860624114990121d71c08ea1/tahoma.sh | bash
 ```
 
-Move the config files to the corresponding places.
 ```bash
-mv ./btop ~/.config/
-mv ./nvim ~/.config/
-mv ./kitty ~/.config/
-mv ./waybar ~/.config/
-mv ./hypr ~/.config/
-mv zshrc ~/.zshrc
+wget -q -O - https://gist.githubusercontent.com/Blastoise/64ba4acc55047a53b680c1b3072dd985/raw/6bdf69384da4783cc6dafcb51d281cb3ddcb7ca0/segoeUI.sh | bash
 ```
 
-## Additional Tools
+### Installing Other Essential Fonts
 
-Oh my zsh
+```bash
+wget -q -O - https://gist.githubusercontent.com/Blastoise/d959d3196fb3937b36969013d96740e0/raw/429d8882b7c34e5dbd7b9cbc9d0079de5bd9e3aa/otherFonts.sh | bash
+```
+
+## RPM-Fusion
+
+```bash
+sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+```
+
+```bash
+sudo dnf config-manager setopt fedora-cisco-openh264.enabled=1
+```
+
+### Multimedia-Codecs (https://rpmfusion.org/)
+
+```bash
+sudo dnf swap ffmpeg-free ffmpeg --allowerasing
+```
+
+```bash
+sudo dnf update @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
+```
+
+#### AMD (Hardware Codecs)
+
+```bash
+sudo dnf swap mesa-va-drivers mesa-va-drivers-freeworld
+sudo dnf swap mesa-vdpau-drivers mesa-vdpau-drivers-freeworld
+```
+
+If using i686 compat libraries (for steam or alikes):
+
+```bash
+sudo dnf swap mesa-va-drivers.i686 mesa-va-drivers-freeworld.i686
+sudo dnf swap mesa-vdpau-drivers.i686 mesa-vdpau-drivers-freeworld.i686
+```
+
+### Other Setups
+
+Oh my zsh (https://ohmyz.sh/)
+
 ```bash
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
-> Change theme to lukerandall
+Node version manager (https://github.com/nvm-sh/nvm):
 
-Node version manager
 ```bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+```
 
+Add this line to the .zshrc:
+
+```bash
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 ```
 
-## Wallpaper
-Copy Wallpaper to the designated place.
-```
-mkdir ~/Pictures
-mv wallpapers ~/Pictures
-```
-
-## Final Steps
-Open nwg-look and configure the rest of the looks to your liking there.
+Personal Note: Download `.rpm` files from protondrive, to install other files that are only available via rpm download.
