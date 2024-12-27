@@ -1,3 +1,5 @@
+# Dotfiles Fedora
+
 The following dotfiles are for a fresh install of Fedora Linux with the default Gnome desktop. Do note this is my personal way of configuring fedora and may differ from your personal preferences.
 
 ## Cleanup
