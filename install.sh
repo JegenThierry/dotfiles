@@ -1,61 +1,103 @@
 #!/bin/bash
 
-# Install essential packages using pacman
-sudo pacman -S --noconfirm --needed git curl vim zsh unzip
+#Exit on any error
+set -e
 
-# Clone and install yay AUR helper
-git clone https://aur.archlinux.org/yay.git
-cd yay
-makepkg -si
-cd ..
-rm -Rf ./yay
+# Ask user if they want the gaming setup
+read -p "Do you want the gaming setup? (y/N): " gaming_choice
+gaming_choice=${gaming_choice,,}  # Convert to lowercase
 
-# Install packages via yay
-yay -S --noconfirm --needed gcc make ripgrep fd unzip neovim waybar btop brightnessctl wlogout ttf-ms-win11-auto vscodium-bin thunderbird thunar catppuccin-cursors-macchiato papirus-icon-theme gtk-engine-murrine gnome-themes-extra nwg-look hyprpaper polkit-gnome flatpak chromium vlc shotwell dotnet-sdk luarocks krita gimp inkscape hyprshot docker docker-compose
+# Cleanup unnecessary programs
+echo "Removing unnecessary programs..."
+sudo dnf remove -y libreoffice-* gnome-tour mediawriter yelp
 
-# Remove dolphin package
-yay -R dolphin
+# Update System
+sudo dnf upgrage -y
 
-# Install Nerd Fonts
-mkdir -p ~/.fonts
-cd ~/.fonts
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/JetBrainsMono.zip
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/Noto.zip
-unzip ./JetBrainsMono.zip
-unzip ./Noto.zip
-rm ./*.zip
+# Install required programs
+echo "Installing essential programs..."
+PKGS=(git curl vim zsh unzip gnome-tweaks gcc make ripgrep fd unzip neovim fzf shotwell dotnet-sdk-8.0 luarocks docker docker-compose curl cabextract xorg-x11-font-utils fontconfig)
+
+if [[ "$gaming_choice" == "y" ]]; then
+    PKGS+=(steam)
+fi
+
+sudo dnf install -y "${PKGS[@]}"
+
+# Install Flatpak programs
+echo "Installing Flatpak programs..."
+FLATPAKS=(com.discordapp.Discord org.telegram.desktop com.github.tchx84.Flatseal org.remmina.Remmina md.obsidian.Obsidian com.mattjakeman.ExtensionManager)
+
+if [[ "$gaming_choice" == "y" ]]; then
+    FLATPAKS+=(com.usebottles.bottles)
+fi
+
+flatpak install -y "${FLATPAKS[@]}"
+flatpak update -y
+
+# Install JetBrainsMono Nerd Font
+echo "Installing JetBrainsMono Nerd Font..."
+mkdir -p ~/.fonts && cd ~/.fonts
+wget -q https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/JetBrainsMono.zip
+unzip -q JetBrainsMono.zip && rm JetBrainsMono.zip && rm *.md && rm *.ofl
 cd ~
 
-# Clone and install Qogir theme
-mkdir -p ~/Downloads
-cd ~/Downloads
-git clone https://github.com/vinceliuice/Qogir-theme.git
-cd Qogir-theme
-./install.sh
-cd ~
+# Install Microsoft fonts
+echo "Installing Microsoft fonts..."
+sudo rpm -i https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
+wget -q -O - https://gist.githubusercontent.com/Blastoise/72e10b8af5ca359772ee64b6dba33c91/raw/2d7ab3caa27faa61beca9fbf7d3aca6ce9a25916/clearType.sh | bash
+wget -q -O - https://gist.githubusercontent.com/Blastoise/b74e06f739610c4a867cf94b27637a56/raw/96926e732a38d3da860624114990121d71c08ea1/tahoma.sh | bash
+wget -q -O - https://gist.githubusercontent.com/Blastoise/64ba4acc55047a53b680c1b3072dd985/raw/6bdf69384da4783cc6dafcb51d281cb3ddcb7ca0/segoeUI.sh | bash
+wget -q -O - https://gist.githubusercontent.com/Blastoise/d959d3196fb3937b36969013d96740e0/raw/429d8882b7c34e5dbd7b9cbc9d0079de5bd9e3aa/otherFonts.sh | bash
 
-# Clean up configuration files
-rm -rf ~/.config/nvim ~/.config/hypr ~/.config/waybar ~/.config/kitty
+# Enable RPM Fusion
+echo "Enabling RPM Fusion..."
+sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
+                     https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+sudo dnf config-manager setopt fedora-cisco-openh264.enabled=1
 
-# Clone and apply dotfiles
-cd ~/Downloads
-git clone https://github.com/JegenThierry/dotfiles.git
-cd dotfiles
-mv ./btop ~/.config/
-mv ./nvim ~/.config/
-mv ./kitty ~/.config/
-mv ./waybar ~/.config/
-mv ./hypr ~/.config/
-mv zshrc ~/.zshrc
+# Install Multimedia Codecs
+echo "Installing multimedia codecs..."
+sudo dnf swap -y ffmpeg-free ffmpeg --allowerasing
+sudo dnf update -y @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
+
+# Install AMD hardware codecs
+echo "Installing AMD hardware codecs..."
+sudo dnf swap -y mesa-va-drivers mesa-va-drivers-freeworld
+sudo dnf swap -y mesa-vdpau-drivers mesa-vdpau-drivers-freeworld
+
+if [[ "$gaming_choice" == "y" ]]; then
+    sudo dnf swap -y mesa-va-drivers.i686 mesa-va-drivers-freeworld.i686
+    sudo dnf swap -y mesa-vdpau-drivers.i686 mesa-vdpau-drivers-freeworld.i686
+fi
 
 # Install Oh My Zsh
+echo "Installing Oh My Zsh..."
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-# Install NVM (Node Version Manager)
+# Install NVM
+echo "Installing Node Version Manager (NVM)..."
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 
-# Organize pictures folder
-mkdir -p ~/Pictures
-mv wallpapers ~/Pictures
+# Add NVM to .zshrc
+echo "Adding NVM to .zshrc..."
+echo 'export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"' >> ~/.zshrc
+echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> ~/.zshrc
 
-echo "Installation and configuration completed!"
+# Setup LazyVim for Neovim
+echo "Configuring Neovim with LazyVim..."
+mv ~/.config/nvim{,.bak} || true
+mv ~/.local/share/nvim{,.bak} || true
+mv ~/.local/state/nvim{,.bak} || true
+mv ~/.cache/nvim{,.bak} || true
+git clone https://github.com/LazyVim/starter ~/.config/nvim
+rm -rf ~/.config/nvim/.git
+
+# Install Colloid icons and cursors
+echo "Installing Colloid icon theme and cursors..."
+git clone https://github.com/vinceliuice/Colloid-icon-theme.git
+cd Colloid-icon-theme && ./install.sh
+cd cursors && ./install.sh
+cd ~ && rm -rf Colloid-icon-theme
+
+echo "Installation complete! Please reboot your system."
