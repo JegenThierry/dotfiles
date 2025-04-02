@@ -9,7 +9,7 @@ gaming_choice=${gaming_choice,,}  # Convert to lowercase
 
 # Cleanup unnecessary programs
 echo "Removing unnecessary programs..."
-sudo dnf remove -y libreoffice-* gnome-tour mediawriter yelp
+sudo dnf remove -y libreoffice-* gnome-tour mediawriter yelp kmines ksudoku katomic kpat bomber kdeconnect kget konqueror kmix juk kontact kaddressbook kjots kolourpaint krdc krfb ksnapshot ktimer kteatime khelpcenter
 
 # Update System
 sudo dnf upgrage -y
@@ -23,6 +23,10 @@ if [[ "$gaming_choice" == "y" ]]; then
 fi
 
 sudo dnf install -y "${PKGS[@]}"
+
+# Ensure Flathub is configured
+echo "Ensuring Flathub is available"
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
 # Install Flatpak programs
 echo "Installing Flatpak programs..."
@@ -73,7 +77,16 @@ fi
 
 # Install Oh My Zsh
 echo "Installing Oh My Zsh..."
+
+export RUNZSH=no
+export CHSH=no
+export KEEP_ZSHRC=yes
+
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+unset RUNZSH
+unset CHSH
+unset KEEP_ZSHRC
 
 # Install NVM
 echo "Installing Node Version Manager (NVM)..."
@@ -84,20 +97,20 @@ echo "Adding NVM to .zshrc..."
 echo 'export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"' >> ~/.zshrc
 echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> ~/.zshrc
 
-# Setup LazyVim for Neovim
-echo "Configuring Neovim with LazyVim..."
-mv ~/.config/nvim{,.bak} || true
-mv ~/.local/share/nvim{,.bak} || true
-mv ~/.local/state/nvim{,.bak} || true
-mv ~/.cache/nvim{,.bak} || true
-git clone https://github.com/LazyVim/starter ~/.config/nvim
-rm -rf ~/.config/nvim/.git
-
 # Install Colloid icons and cursors
 echo "Installing Colloid icon theme and cursors..."
 git clone https://github.com/vinceliuice/Colloid-icon-theme.git
 cd Colloid-icon-theme && ./install.sh
 cd cursors && ./install.sh
 cd ~ && rm -rf Colloid-icon-theme
+
+echo "Installing Zed"
+curl -f https://zed.dev/install.sh | sh
+
+echo "Installing JetBrainsToolbox"
+cd ~/Downloads
+wget https://download.jetbrains.com/toolbox/jetbrains-toolbox-2.5.4.38621.tar.gz
+tar -xf ./jetbrains-toolbox-2.5.4.38621.tar.gz
+./jetbrains-toolbox-2.5.4.38621/jetbrains-toolbox
 
 echo "Installation complete! Please reboot your system."
