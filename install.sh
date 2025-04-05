@@ -11,18 +11,24 @@ gaming_choice=${gaming_choice,,}  # Convert to lowercase
 echo "Removing unnecessary programs..."
 sudo dnf remove -y libreoffice-* gnome-tour mediawriter yelp kmines ksudoku katomic kpat bomber kdeconnect kget konqueror kmix juk kontact kaddressbook kjots kolourpaint krdc krfb ksnapshot ktimer kteatime khelpcenter
 
+# Enable RPM Fusion
+echo "Enabling RPM Fusion..."
+sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
+                     https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+sudo dnf config-manager setopt fedora-cisco-openh264.enabled=1
+
 # Update System
-sudo dnf upgrage -y
+sudo dnf upgrade -y
 
 # Install required programs
 echo "Installing essential programs..."
-PKGS=(git curl vim zsh unzip gnome-tweaks gcc make ripgrep fd unzip neovim fzf shotwell dotnet-sdk-8.0 luarocks docker docker-compose curl cabextract xorg-x11-font-utils fontconfig)
+PKGS=(git curl vim zsh unzip flatpak gnome-tweaks gcc make ripgrep fd unzip neovim fzf shotwell dotnet-sdk-8.0 luarocks docker docker-compose curl cabextract xorg-x11-font-utils fontconfig)
 
 if [[ "$gaming_choice" == "y" ]]; then
     PKGS+=(steam)
 fi
 
-sudo dnf install -y "${PKGS[@]}"
+sudo dnf install --skip-unavailable -y "${PKGS[@]}"
 
 # Ensure Flathub is configured
 echo "Ensuring Flathub is available"
@@ -43,7 +49,9 @@ flatpak update -y
 echo "Installing JetBrainsMono Nerd Font..."
 mkdir -p ~/.fonts && cd ~/.fonts
 wget -q https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/JetBrainsMono.zip
-unzip -q JetBrainsMono.zip && rm JetBrainsMono.zip && rm *.md && rm *.ofl
+wget -q https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/Ubuntu.zip
+unzip -q JetBrainsMono.zip && rm JetBrainsMono.zip && rm *.md && rm *.txt
+unzip -q Ubuntu.zip && rm *.zip && rm *.md && rm *.txt
 cd ~
 
 # Install Microsoft fonts
@@ -54,16 +62,10 @@ wget -q -O - https://gist.githubusercontent.com/Blastoise/b74e06f739610c4a867cf9
 wget -q -O - https://gist.githubusercontent.com/Blastoise/64ba4acc55047a53b680c1b3072dd985/raw/6bdf69384da4783cc6dafcb51d281cb3ddcb7ca0/segoeUI.sh | bash
 wget -q -O - https://gist.githubusercontent.com/Blastoise/d959d3196fb3937b36969013d96740e0/raw/429d8882b7c34e5dbd7b9cbc9d0079de5bd9e3aa/otherFonts.sh | bash
 
-# Enable RPM Fusion
-echo "Enabling RPM Fusion..."
-sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
-                     https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
-sudo dnf config-manager setopt fedora-cisco-openh264.enabled=1
-
 # Install Multimedia Codecs
 echo "Installing multimedia codecs..."
 sudo dnf swap -y ffmpeg-free ffmpeg --allowerasing
-sudo dnf update -y @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
+sudo dnf4 update -y @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
 
 # Install AMD hardware codecs
 echo "Installing AMD hardware codecs..."
@@ -104,12 +106,19 @@ cd Colloid-icon-theme && ./install.sh
 cd cursors && ./install.sh
 cd ~ && rm -rf Colloid-icon-theme
 
+echo "Installing Catppuccin GTK-Theme"
+cd ~/Downloads
+git clone https://github.com/Fausto-Korpsvart/Catppuccin-GTK-Theme.git
+cd Catppuccin-GTK-Theme
+cd themes
+./install.sh
+
 echo "Installing Zed"
 curl -f https://zed.dev/install.sh | sh
 
 echo "Installing JetBrainsToolbox"
 cd ~/Downloads
-wget https://download.jetbrains.com/toolbox/jetbrains-toolbox-2.5.4.38621.tar.gz
+wget -q https://download.jetbrains.com/toolbox/jetbrains-toolbox-2.5.4.38621.tar.gz
 tar -xf ./jetbrains-toolbox-2.5.4.38621.tar.gz
 ./jetbrains-toolbox-2.5.4.38621/jetbrains-toolbox
 
