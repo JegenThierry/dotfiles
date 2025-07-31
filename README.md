@@ -7,7 +7,11 @@ The following dotfiles are for a fresh install of Fedora Linux with the default 
 Uninstall the following programs with the following command:
 
 ```bash
-sudo dnf remove -y libreoffice-* gnome-tour mediawriter yelp
+sudo dnf remove -y \
+  libreoffice-* \
+  gnome-tour \
+  mediawriter \
+  yelp
 ```
 
 ## Before continuing some initial Setup is required:
