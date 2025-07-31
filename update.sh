@@ -1,16 +1,20 @@
 #!/bin/bash
-#Exit on any error
-set -e
+# Exit on error
+set -euo pipefail
 
-if [ $EUID != 0 ]; then
-    sudo "$0" "$@"
-    exit $?
+# Ensure script is run as root, re-exec with sudo if not
+if [[ $EUID -ne 0 ]]; then
+    exec sudo "$0" "$@"
 fi
 
-echo "Updating System"
-dnf update -y
+echo "==> Updating System Packages"
+dnf upgrade --refresh -y
+
+echo "==> Removing Unused Packages"
 dnf remove autoremove -y
+
+echo "==> Cleaning Up DNF Cache"
 dnf clean all -y
 
-echo "Updating Flatpak"
+echo "==> Updating Flatpak Packages"
 flatpak update -y
