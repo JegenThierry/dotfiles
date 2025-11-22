@@ -1,96 +1,98 @@
-# Dotfiles Fedora
+# Dotfiles Pop-OS
 
-The following dotfiles are for a fresh install of Fedora Linux with the default Gnome desktop. Do note this is my personal way of configuring fedora and may differ from your personal preferences.
+The following dotfiles are used for my setup on a fresh installation of Pop-OS. Opinionated setup that may not appeal to the general public and focuses on personal preferences.
 
-## Cleanup
+## Update
 
-Uninstall the following programs with the following command:
-
-```bash
-sudo dnf remove -y \
-  libreoffice-* \
-  gnome-tour \
-  mediawriter \
-  yelp
-```
-
-## Before continuing some initial Setup is required:
-
-### Install Updates
+Update system packages and upgrade installed software.
 
 ```bash
-sudo dnf group update core
+sudo apt update && sudo apt upgrade -y
 ```
+
+## Remove bloatware
+
+Uninstall unnecessary applications and services to optimize system performance.
 
 ```bash
-sudo dnf4 group install core
+sudo apt remove -y libreoffice-* \
+  simple-scan \
+  yelp \
+  popsicle
 ```
+
+Clean up dangling packages.
 
 ```bash
-sudo dnf upgrade -y
+sudo apt autoremove -y
 ```
 
-### If supported do some Firmware upgrades
+## Installing programs
+
+Basic programs:
 
 ```bash
-sudo fwupdmgr refresh --force
-sudo fwupdmgr get-devices # Lists devices with available updates.
-sudo fwupdmgr get-updates # Fetches list of available updates.
-sudo fwupdmgr update
+sudo apt install -y \
+  ubuntu-restricted-extras ubuntu-restricted-addons \
+  git curl dotnet-sdk-8.0 golang zsh shotwell \
 ```
 
-## Installing Programs
-
-Install the following programs:
+Installing neovim
 
 ```bash
-sudo dnf install -y \
-  git curl vim zsh unzip gnome-tweaks \
-  gcc make ripgrep fd neovim fzf shotwell \
-  dotnet-sdk-8.0 luarocks docker docker-compose \
-  curl cabextract xorg-x11-font-utils fontconfig
+sudo add-apt-repository ppa:neovim-ppa/unstable -y
+sudo apt update -y
+sudo apt install -y make gcc ripgrep unzip git xclip neovim luarocks fzf ripgrep
 ```
 
-Install the following programs (with gaming):
+Installing docker
 
 ```bash
-sudo dnf install -y \
-  git curl vim zsh unzip gnome-tweaks \
-  gcc make ripgrep fd neovim fzf shotwell \
-  dotnet-sdk-8.0 luarocks docker docker-compose \
-  steam curl cabextract xorg-x11-font-utils fontconfig
+sudo apt remove $(dpkg --get-selections docker.io docker-compose docker-compose-v2 docker-doc podman-docker containerd runc | cut -f1)
+# Add Docker's official GPG key:
+sudo apt update
+sudo apt install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources:
+sudo tee /etc/apt/sources.list.d/docker.sources <<EOF
+Types: deb
+URIs: https://download.docker.com/linux/ubuntu
+Suites: $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
+Components: stable
+Signed-By: /etc/apt/keyrings/docker.asc
+EOF
+
+sudo apt update
+sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 
-Install programs via flatpak:
+Installing Zed as a main Text-Editor
+
+```bash
+curl -f https://zed.dev/install.sh | sh
+```
+
+Installing flatpaks
 
 ```bash
 flatpak install \
   com.discordapp.Discord \
-  org.telegram.desktop \
   com.github.tchx84.Flatseal \
   org.remmina.Remmina \
   md.obsidian.Obsidian \
-  com.mattjakeman.ExtensionManager
-```
-
-Install programs via flatpak (with gaming):
-
-```bash
-flatpak install \
-  com.discordapp.Discord \
-  org.telegram.desktop \
-  com.github.tchx84.Flatseal \
-  org.remmina.Remmina \
-  md.obsidian.Obsidian \
-  com.mattjakeman.ExtensionManager \
   com.usebottles.bottles \
   com.spotify.Client \
-  org.mozilla.Thunderbird
+  io.dbeaver.DBeaverCommunity \
+  com.usebruno.Bruno \
+  org.signal.Signal
 ```
 
-## Adding Fonts
+## Setting up fonts
 
-I use JetBrainsMono Nerd Font as my font for coding.
+Create a directory for fonts and download both JetBrainsMono and FiraCode extract the `.zip` files and remove the `.zip` files after extraction.
 
 ```bash
 mkdir ~/.fonts
@@ -103,40 +105,15 @@ rm ./*.zip
 cd
 ```
 
-## Media Codes and Hardware Acceleration (AMD Only)
+## Setting up tools
 
-```bash
-sudo dnf4 group install multimedia
-sudo dnf swap 'ffmpeg-free' 'ffmpeg' --allowerasing
-sudo dnf upgrade @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
-sudo dnf group install -y sound-and-video
-```
-
-```bash
-sudo dnf install ffmpeg-libs libva libva-utils
-```
-
-```bash
-sudo dnf swap mesa-va-drivers mesa-va-drivers-freeworld
-sudo dnf swap mesa-vdpau-drivers mesa-vdpau-drivers-freeworld
-sudo dnf swap mesa-va-drivers.i686 mesa-va-drivers-freeworld.i686
-sudo dnf swap mesa-vdpau-drivers.i686 mesa-vdpau-drivers-freeworld.i686
-```
-
-```bash
-sudo dnf install -y openh264 gstreamer1-plugin-openh264 mozilla-openh264
-sudo dnf config-manager setopt fedora-cisco-openh264.enabled=1
-```
-
-### Other Setups
-
-Oh my zsh (https://ohmyz.sh/)
+Setting up `Oh my zsh` (https://ohmyz.sh/)
 
 ```bash
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
-Node version manager (https://github.com/nvm-sh/nvm):
+Setting up `Node version manager` (https://github.com/nvm-sh/nvm):
 
 ```bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash && \
@@ -144,29 +121,14 @@ echo 'export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm"
 echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm' >> ~/.zshrc
 ```
 
-### Nvim config (kickstart nivm: https://github.com/nvim-lua/kickstart.nvim)
+Setting up `Kickstart nvim` (https://github.com/nvim-lua/kickstart.nvim):
 
 ```bash
 git clone https://github.com/nvim-lua/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
 ```
 
-### Icons and Cursors
+## Not included in this repo:
 
-Clone and install the colloid icon-theme:
-
-```bash
-git clone https://github.com/vinceliuice/Colloid-icon-theme.git && \
-cd Colloid-icon-theme && \
-./install.sh && \
-cd cursors && \
-./install.sh
-```
-
-### Optimizations
-
-Execute the following optimizations based on personal preferences:
-
-```bash
-sudo systemctl disable NetworkManager-wait-online.service # Disable NetworkManager-wait-online.service
-sudo rm /etc/xdg/autostart/org.gnome.Software.desktop # Disable GNOME-Software
-```
+Instruction for installing the following software:
+ - JetBrains Toolbox
+ - Steam
