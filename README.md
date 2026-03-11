@@ -49,7 +49,7 @@ curl -f https://zed.dev/install.sh | sh
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash
 ```
 
-**Jetbrains Toolbox:**
+**Jetbrains Toolbox: (Note: the provided version may be outdated)**
 
 ```bash
 mkdir ~/Applications
