@@ -50,7 +50,7 @@ plugins=(
 	ssh-agent
 	zsh-autosuggestions
 	zsh-syntax-highlighting
-	zsh-you-should-use
+	you-should-use
 )
 
 source $ZSH/oh-my-zsh.sh
