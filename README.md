@@ -119,6 +119,13 @@ echo 'export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm"
 echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm' >> ~/.zshrc
 ```
 
+**SSH Keys:**
+
+```bash
+chmod 600 key1 key2
+chmod 644 key1.pub key2.pub
+``` 
+
 ## Optimizations
 
 ```bash
