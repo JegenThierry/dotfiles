@@ -8,7 +8,6 @@ Uninstall the following programs with the following command:
 
 ```bash
 sudo dnf remove -y \
-  libreoffice-* \
   gnome-tour \
   mediawriter \
   yelp
@@ -29,14 +28,26 @@ sudo dnf4 group install core
 ```bash
 sudo dnf upgrade -y
 ```
-
-### If supported do some Firmware upgrades
+**Setup: Special**
 
 ```bash
-sudo fwupdmgr refresh --force
-sudo fwupdmgr get-devices # Lists devices with available updates.
-sudo fwupdmgr get-updates # Fetches list of available updates.
-sudo fwupdmgr update
+sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm -y
+
+sudo dnf group upgrade core -y
+sudo dnf4 group install core -y
+
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
+sudo dnf4 group install multimedia
+sudo dnf swap 'ffmpeg-free' 'ffmpeg' --allowerasing # Switch to full FFMPEG.
+sudo dnf upgrade @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin # Installs gstreamer components. Required if you use Gnome Videos and other dependent applications.
+sudo dnf group install -y sound-and-video # Installs useful Sound and Video complementary packages.
+
+sudo dnf install ffmpeg-libs libva libva-utils -y
+sudo dnf swap mesa-va-drivers mesa-va-drivers-freeworld -y
+sudo dnf swap mesa-vdpau-drivers mesa-vdpau-drivers-freeworld -y
+sudo dnf swap mesa-va-drivers.i686 mesa-va-drivers-freeworld.i686 -y
+sudo dnf swap mesa-vdpau-drivers.i686 mesa-vdpau-drivers-freeworld.i686 -y
 ```
 
 ## Installing Programs
@@ -47,8 +58,7 @@ Install the following programs:
 sudo dnf install -y \
   git curl vim zsh unzip gnome-tweaks \
   gcc make ripgrep fd neovim fzf shotwell \
-  dotnet-sdk-8.0 luarocks docker docker-compose \
-  curl cabextract xorg-x11-font-utils fontconfig
+  dotnet-sdk-10.0 luarocks docker docker-compose
 ```
 
 Install the following programs (with gaming):
@@ -57,8 +67,7 @@ Install the following programs (with gaming):
 sudo dnf install -y \
   git curl vim zsh unzip gnome-tweaks \
   gcc make ripgrep fd neovim fzf shotwell \
-  dotnet-sdk-8.0 luarocks docker docker-compose \
-  steam curl cabextract xorg-x11-font-utils fontconfig
+  dotnet-sdk-10.0 luarocks docker docker-compose steam
 ```
 
 Install programs via flatpak:
@@ -66,11 +75,15 @@ Install programs via flatpak:
 ```bash
 flatpak install \
   com.discordapp.Discord \
-  org.telegram.desktop \
   com.github.tchx84.Flatseal \
   org.remmina.Remmina \
   md.obsidian.Obsidian \
-  com.mattjakeman.ExtensionManager
+  com.spotify.Client \
+  org.mozilla.Thunderbird \
+  io.dbeaver.DBeaverCommunity \ 
+  com.usebruno.Bruno \
+  com.mattjakeman.ExtensionManager \
+  org.signal.Signal
 ```
 
 Install programs via flatpak (with gaming):
@@ -78,19 +91,44 @@ Install programs via flatpak (with gaming):
 ```bash
 flatpak install \
   com.discordapp.Discord \
-  org.telegram.desktop \
   com.github.tchx84.Flatseal \
   org.remmina.Remmina \
   md.obsidian.Obsidian \
-  com.mattjakeman.ExtensionManager \
   com.usebottles.bottles \
   com.spotify.Client \
-  org.mozilla.Thunderbird
+  org.mozilla.Thunderbird \
+  moe.launcher.the-honkers-railway-launcher \
+  io.dbeaver.DBeaverCommunity \ 
+  com.usebruno.Bruno \
+  com.mattjakeman.ExtensionManager \
+  org.signal.Signal
 ```
 
-## Adding Fonts
+**Zed:**
 
-I use JetBrainsMono Nerd Font as my font for coding.
+```bash
+curl -f https://zed.dev/install.sh | sh
+```
+
+**Node Version Manager:**
+
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash
+```
+
+**Jetbrains Toolbox: (Note: the provided version may be outdated)**
+
+```bash
+mkdir ~/Applications
+cd ~/Applications
+curl -L "https://download.jetbrains.com/toolbox/jetbrains-toolbox-3.2.0.65851.tar.gz" -o "jetbrains-toolbox.tar.gz"
+tar -xzf ./jetbrains-toolbox.tar.gz
+rm ./jetbrains-toolbox.tar.gz
+```
+
+## Fonts
+
+Download and extract `JetBrainsMono` and `FiraCode`:
 
 ```bash
 mkdir ~/.fonts
@@ -103,68 +141,59 @@ rm ./*.zip
 cd
 ```
 
-## Media Codes and Hardware Acceleration (AMD Only)
+## Icons and Cursors
+
+Using the colloid-icon-theme:
 
 ```bash
-sudo dnf4 group install multimedia
-sudo dnf swap 'ffmpeg-free' 'ffmpeg' --allowerasing
-sudo dnf upgrade @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
-sudo dnf group install -y sound-and-video
-```
-
-```bash
-sudo dnf install ffmpeg-libs libva libva-utils
-```
-
-```bash
-sudo dnf swap mesa-va-drivers mesa-va-drivers-freeworld
-sudo dnf swap mesa-vdpau-drivers mesa-vdpau-drivers-freeworld
-sudo dnf swap mesa-va-drivers.i686 mesa-va-drivers-freeworld.i686
-sudo dnf swap mesa-vdpau-drivers.i686 mesa-vdpau-drivers-freeworld.i686
-```
-
-```bash
-sudo dnf install -y openh264 gstreamer1-plugin-openh264 mozilla-openh264
-sudo dnf config-manager setopt fedora-cisco-openh264.enabled=1
-```
-
-### Other Setups
-
-Oh my zsh (https://ohmyz.sh/)
-
-```bash
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-```
-
-Node version manager (https://github.com/nvm-sh/nvm):
-
-```bash
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash && \
-echo 'export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"' >> ~/.zshrc && \
-echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm' >> ~/.zshrc
-```
-
-### Nvim config (kickstart nivm: https://github.com/nvim-lua/kickstart.nvim)
-
-```bash
-git clone https://github.com/nvim-lua/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
-```
-
-### Icons and Cursors
-
-Clone and install the colloid icon-theme:
-
-```bash
+cd ~/Downloads
 git clone https://github.com/vinceliuice/Colloid-icon-theme.git && \
 cd Colloid-icon-theme && \
 ./install.sh && \
 cd cursors && \
 ./install.sh
+cd ~/Downloads
+sudo rm -R ./Colloid-icon-theme
+cd
 ```
 
-### Optimizations
+## Configurations
 
-Execute the following optimizations based on personal preferences:
+**Oh my Zsh:**
+
+```bash
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
+
+**Installing Plugins**
+
+```bash
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+git clone https://github.com/MichaelAquilina/zsh-you-should-use.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/you-should-use
+```
+
+**Kickstart nvim config:**
+
+```bash
+git clone https://github.com/nvim-lua/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
+```
+
+**Add NVM to .zshrc:**
+
+```bash
+echo 'export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"' >> ~/.zshrc && \
+echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm' >> ~/.zshrc
+```
+
+**SSH Keys:**
+
+```bash
+chmod 600 key1 key2
+chmod 644 key1.pub key2.pub
+``` 
+
+## Optimizations
 
 ```bash
 sudo systemctl disable NetworkManager-wait-online.service # Disable NetworkManager-wait-online.service
