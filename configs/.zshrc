@@ -3,8 +3,9 @@ export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="lukerandall"
 
 # SSH configuration
-zstyle :omz:plugin:ssh-agent identities id_ed25519 server_default
+zstyle :omz:plugin:ssh-agent identities id_ed25519 server_default 
 zstyle :omz:plugin:ssh-agent lifetime 4h
+zstyle :omz:plugin:ssh-agent lazy yes
 
 zstyle ':omz:update' mode auto
 zstyle ':omz:update' frequency 5
@@ -67,4 +68,8 @@ fi
 # Compilation flags
 export PATH=$HOME/.local/bin:$PATH
 
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
 # Aliases
+alias ytdl='yt-dlp -x --audio-format mp3 --audio-quality 0 --embed-thumbnail --add-metadata -o "%(title)s.%(ext)s"'
