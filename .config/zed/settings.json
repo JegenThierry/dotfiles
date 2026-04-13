@@ -9,7 +9,7 @@
 {
   "telemetry": {
     "diagnostics": false,
-    "metrics": false,
+    "metrics": false
   },
   "vim_mode": true,
   "ui_font_size": 16,
@@ -17,6 +17,6 @@
   "theme": {
     "mode": "system",
     "light": "One Light",
-    "dark": "One Dark",
-  },
+    "dark": "One Dark"
+  }
 }

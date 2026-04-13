@@ -4,7 +4,7 @@ set -euo pipefail
 
 # Ensure script is run as root, re-exec with sudo if not
 if [[ $EUID -ne 0 ]]; then
-    exec sudo "$0" "$@"
+  exec sudo "$0" "$@"
 fi
 
 echo "==> Updating System Packages"

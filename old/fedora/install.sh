@@ -14,7 +14,7 @@ sudo dnf remove -y libreoffice-* gnome-tour mediawriter yelp kmines ksudoku kato
 # Enable RPM Fusion
 echo "Enabling RPM Fusion..."
 sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
-                     https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+         https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 sudo dnf config-manager setopt fedora-cisco-openh264.enabled=1
 
 # Update System
@@ -25,7 +25,7 @@ echo "Installing essential programs..."
 PKGS=(git curl vim zsh unzip flatpak gnome-tweaks gcc make ripgrep fd unzip neovim fzf shotwell dotnet-sdk-8.0 luarocks docker docker-compose curl cabextract xorg-x11-font-utils fontconfig)
 
 if [[ "$gaming_choice" == "y" ]]; then
-    PKGS+=(steam)
+  PKGS+=(steam)
 fi
 
 sudo dnf install --skip-unavailable -y "${PKGS[@]}"
@@ -39,7 +39,7 @@ echo "Installing Flatpak programs..."
 FLATPAKS=(com.discordapp.Discord org.telegram.desktop com.github.tchx84.Flatseal org.remmina.Remmina md.obsidian.Obsidian com.mattjakeman.ExtensionManager)
 
 if [[ "$gaming_choice" == "y" ]]; then
-    FLATPAKS+=(com.usebottles.bottles)
+  FLATPAKS+=(com.usebottles.bottles)
 fi
 
 flatpak install -y "${FLATPAKS[@]}"
@@ -73,8 +73,8 @@ sudo dnf swap -y mesa-va-drivers mesa-va-drivers-freeworld
 sudo dnf swap -y mesa-vdpau-drivers mesa-vdpau-drivers-freeworld
 
 if [[ "$gaming_choice" == "y" ]]; then
-    sudo dnf swap -y mesa-va-drivers.i686 mesa-va-drivers-freeworld.i686
-    sudo dnf swap -y mesa-vdpau-drivers.i686 mesa-vdpau-drivers-freeworld.i686
+  sudo dnf swap -y mesa-va-drivers.i686 mesa-va-drivers-freeworld.i686
+  sudo dnf swap -y mesa-vdpau-drivers.i686 mesa-vdpau-drivers-freeworld.i686
 fi
 
 # Install Oh My Zsh

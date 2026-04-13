@@ -3,7 +3,7 @@ export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="lukerandall"
 
 # SSH configuration
-zstyle :omz:plugin:ssh-agent identities id_ed25519 server_default 
+zstyle :omz:plugin:ssh-agent identities id_ed25519 server_default
 zstyle :omz:plugin:ssh-agent lifetime 4h
 zstyle :omz:plugin:ssh-agent lazy yes
 
@@ -46,12 +46,12 @@ HIST_STAMPS="dd.mm.yyyy/"
 
 # Plugins
 plugins=(
-	git
-	fzf
-	ssh-agent
-	zsh-autosuggestions
-	zsh-syntax-highlighting
-	you-should-use
+  git
+  fzf
+  ssh-agent
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+  you-should-use
 )
 
 source $ZSH/oh-my-zsh.sh

@@ -32,7 +32,7 @@ flatpak install flathub \
   com.spotify.Client \
   org.mozilla.Thunderbird \
   moe.launcher.the-honkers-railway-launcher \
-  io.dbeaver.DBeaverCommunity \ 
+  io.dbeaver.DBeaverCommunity \
   com.usebruno.Bruno \
   org.signal.Signal
 ```
@@ -124,7 +124,7 @@ echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm' >> ~/.z
 ```bash
 chmod 600 key1 key2
 chmod 644 key1.pub key2.pub
-``` 
+```
 
 ## Optimizations
 
