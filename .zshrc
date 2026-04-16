@@ -71,5 +71,22 @@ export PATH=$HOME/.local/bin:$PATH
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
+export FZF_DEFAULT_OPTS="
+  --height=60%
+  --layout=reverse
+  --border=rounded
+  --margin=5%
+  --padding=1
+  --info=inline
+  --prompt='  🔍 '
+  --pointer='  '
+  --marker='✓ '
+  --header='Search Files and Commands'
+  --color='bg:-1,bg+:#313244,fg:#cdd6f4,fg+:#cdd6f4'
+  --color='hl:#f38ba8,hl+:#f38ba8,header:#585b70'
+  --color='info:#cba6f7,prompt:#bac2de,pointer:#f5e0dc'
+  --color='marker:#a6e3a1,spinner:#f5e0dc,border:#585b70'
+"
+
 # Aliases
 alias ytdl='yt-dlp -x --audio-format mp3 --audio-quality 0 --embed-thumbnail --add-metadata -o "%(title)s.%(ext)s"'
