@@ -126,6 +126,19 @@ chmod 600 key1 key2
 chmod 644 key1.pub key2.pub
 ```
 
+Once the keys are setup you can clone all the projects:
+
+```bash
+cd ~/Documents
+mkdir programming
+git clone ssh://git@codeberg.org/thierryjegen/docker-containers.git
+git clone ssh://git@codeberg.org/thierryjegen/proton-auth-converter.git
+git clone ssh://git@codeberg.org/thierryjegen/playgrounds.git
+git clone ssh://git@codeberg.org/thierryjegen/tiny-emitter-cve-fixes.git
+git clone ssh://git@codeberg.org/thierryjegen/server-config.git
+git clone ssh://git@codeberg.org/thierryjegen/budget-planner.git
+```
+
 ## Optimizations
 
 ```bash
