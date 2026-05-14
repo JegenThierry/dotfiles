@@ -27,72 +27,76 @@ Clean up dangling packages.
 sudo apt autoremove -y
 ```
 
-## Installing programs
+## Installing Software
 
-Basic programs:
-
-```bash
-sudo apt install -y \
-  ubuntu-restricted-extras ubuntu-restricted-addons \
-  git curl dotnet-sdk-8.0 golang zsh shotwell \
-```
-
-Installing neovim
+**APT:**
 
 ```bash
 sudo add-apt-repository ppa:neovim-ppa/unstable -y
-sudo apt update -y
-sudo apt install -y make gcc ripgrep unzip git xclip neovim luarocks fzf ripgrep
-```
-
-Installing docker
-
-```bash
-sudo apt remove $(dpkg --get-selections docker.io docker-compose docker-compose-v2 docker-doc podman-docker containerd runc | cut -f1)
-# Add Docker's official GPG key:
 sudo apt update
-sudo apt install ca-certificates curl
-sudo install -m 0755 -d /etc/apt/keyrings
-sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-sudo chmod a+r /etc/apt/keyrings/docker.asc
-
-# Add the repository to Apt sources:
-sudo tee /etc/apt/sources.list.d/docker.sources <<EOF
-Types: deb
-URIs: https://download.docker.com/linux/ubuntu
-Suites: $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
-Components: stable
-Signed-By: /etc/apt/keyrings/docker.asc
-EOF
-
-sudo apt update
-sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo apt install -y \
+  zsh \
+  flatpak \
+  gcc \
+  make \
+  git \
+  rsync \
+  rclone \
+  ripgrep \
+  fd \
+  unzip \
+  neovim \
+  dotnet-sdk-8.0 \
+  luarocks \
+  fzf \
+  docker.io \
+  docker-compose \
+  curl \
+  bat
 ```
 
-Installing Zed as a main Text-Editor
+**Flatpaks:**
 
 ```bash
-curl -f https://zed.dev/install.sh | sh
-```
-
-Installing flatpaks
-
-```bash
-flatpak install \
+flatpak install flathub \
   com.discordapp.Discord \
   com.github.tchx84.Flatseal \
   org.remmina.Remmina \
   md.obsidian.Obsidian \
   com.usebottles.bottles \
   com.spotify.Client \
+  org.mozilla.Thunderbird \
+  moe.launcher.the-honkers-railway-launcher \
   io.dbeaver.DBeaverCommunity \
   com.usebruno.Bruno \
   org.signal.Signal
 ```
 
-## Setting up fonts
+**Zed:**
 
-Create a directory for fonts and download both JetBrainsMono and FiraCode extract the `.zip` files and remove the `.zip` files after extraction.
+```bash
+curl -f https://zed.dev/install.sh | sh
+```
+
+**Node Version Manager:**
+
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash
+```
+
+**Jetbrains Toolbox: (Note: the provided version may be outdated)**
+
+```bash
+mkdir ~/Applications
+cd ~/Applications
+curl -L "https://download.jetbrains.com/toolbox/jetbrains-toolbox-3.2.0.65851.tar.gz" -o "jetbrains-toolbox.tar.gz"
+tar -xzf ./jetbrains-toolbox.tar.gz
+rm ./jetbrains-toolbox.tar.gz
+```
+
+## Fonts
+
+Download and extract `JetBrainsMono` and `FiraCode`:
 
 ```bash
 mkdir ~/.fonts
@@ -105,30 +109,39 @@ rm ./*.zip
 cd
 ```
 
-## Setting up tools
+## Configurations
 
-Setting up `Oh my zsh` (https://ohmyz.sh/)
+**Oh my Zsh:**
 
 ```bash
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
-Setting up `Node version manager` (https://github.com/nvm-sh/nvm):
+**Installing Plugins**
 
 ```bash
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash && \
-echo 'export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"' >> ~/.zshrc && \
-echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm' >> ~/.zshrc
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+git clone https://github.com/MichaelAquilina/zsh-you-should-use.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/you-should-use
 ```
 
-Setting up `Kickstart nvim` (https://github.com/nvim-lua/kickstart.nvim):
+
+**Kickstart nvim config:**
 
 ```bash
 git clone https://github.com/nvim-lua/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
 ```
 
-## Not included in this repo:
+**Add NVM to .zshrc:**
 
-Instruction for installing the following software:
- - JetBrains Toolbox
- - Steam
+```bash
+echo 'export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"' >> ~/.zshrc && \
+echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm' >> ~/.zshrc
+```
+
+## Docker
+
+```bash
+sudo systemctl enable --now docker
+sudo usermod -aG docker $USER
+```

@@ -90,3 +90,4 @@ export FZF_DEFAULT_OPTS="
 
 # Aliases
 alias ytdl='yt-dlp -x --audio-format mp3 --audio-quality 0 --embed-thumbnail --add-metadata -o "%(title)s.%(ext)s"'
+alias proton-sync='rclone sync "Proton Drive:" /home/thierry/ProtonDrive --progress'

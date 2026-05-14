@@ -59,5 +59,5 @@ irm https://christitus.com/win | iex
 My personal Software configuration for importing into **Chris Titus Tech utility:**
 
 ```json
-winget install OpenWhisperSystems.Signal Mozilla.Thunderbird Microsoft.VisualStudioCode 7zip.7zip Nextcloud.NextcloudDesktop Obsidian.Obsidian ElectronicArts.EADesktop Discord.Discord Microsoft.WindowsTerminal EpicGames.EpicGamesLauncher Microsoft.PowerToys Valve.Steam Mozilla.Firefox Git.Git CoreyButler.NVMforWindows Brave.Brave GitHub.GitHubDesktop JetBrains.Toolbox Bitwarden.Bitwarden Microsoft.VisualStudio.Community 9WZDNCRFJBH4 -e --accept-package-agreements --accept-source-agreements
+winget install OpenWhisperSystems.Signal Mozilla.Thunderbird Microsoft.VisualStudioCode 7zip.7zip Nextcloud.NextcloudDesktop Obsidian.Obsidian ElectronicArts.EADesktop Discord.Discord Microsoft.WindowsTerminal EpicGames.EpicGamesLauncher Microsoft.PowerToys Valve.Steam Mozilla.Firefox Git.Git Docker.DockerDesktop CoreyButler.NVMforWindows Brave.Brave GitHub.GitHubDesktop JetBrains.Toolbox Bitwarden.Bitwarden Microsoft.VisualStudio.Community dbeaver.dbeaver usebruno.bruno Spotify.Spotify 9WZDNCRFJBH4 -e --accept-package-agreements --accept-source-agreements
 ```

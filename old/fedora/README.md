@@ -50,46 +50,37 @@ sudo dnf swap mesa-va-drivers.i686 mesa-va-drivers-freeworld.i686 -y
 sudo dnf swap mesa-vdpau-drivers.i686 mesa-vdpau-drivers-freeworld.i686 -y
 ```
 
-## Installing Programs
+## Installing Software
 
-Install the following programs:
-
-```bash
-sudo dnf install -y \
-  git curl vim zsh unzip gnome-tweaks \
-  gcc make ripgrep fd neovim fzf shotwell \
-  dotnet-sdk-10.0 luarocks docker docker-compose
-```
-
-Install the following programs (with gaming):
+**DNF:**
 
 ```bash
 sudo dnf install -y \
-  git curl vim zsh unzip gnome-tweaks \
-  gcc make ripgrep fd neovim fzf shotwell \
-  dotnet-sdk-10.0 luarocks docker docker-compose steam
+  zsh \
+  flatpak \
+  gcc \
+  make \
+  git \
+  rsync \
+  rclone \
+  ripgrep \
+  fd \
+  unzip \
+  neovim \
+  dotnet-sdk \
+  luarocks \
+  fzf \
+  docker \
+  docker-compose \
+  steam \
+  curl \
+  bat
 ```
 
-Install programs via flatpak:
+**Flatpaks:**
 
 ```bash
-flatpak install \
-  com.discordapp.Discord \
-  com.github.tchx84.Flatseal \
-  org.remmina.Remmina \
-  md.obsidian.Obsidian \
-  com.spotify.Client \
-  org.mozilla.Thunderbird \
-  io.dbeaver.DBeaverCommunity \
-  com.usebruno.Bruno \
-  com.mattjakeman.ExtensionManager \
-  org.signal.Signal
-```
-
-Install programs via flatpak (with gaming):
-
-```bash
-flatpak install \
+flatpak install flathub \
   com.discordapp.Discord \
   com.github.tchx84.Flatseal \
   org.remmina.Remmina \
@@ -100,7 +91,6 @@ flatpak install \
   moe.launcher.the-honkers-railway-launcher \
   io.dbeaver.DBeaverCommunity \
   com.usebruno.Bruno \
-  com.mattjakeman.ExtensionManager \
   org.signal.Signal
 ```
 
@@ -173,6 +163,7 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 git clone https://github.com/MichaelAquilina/zsh-you-should-use.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/you-should-use
 ```
 
+
 **Kickstart nvim config:**
 
 ```bash
@@ -191,6 +182,13 @@ echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm' >> ~/.z
 ```bash
 chmod 600 key1 key2
 chmod 644 key1.pub key2.pub
+```
+
+## Docker
+
+```bash
+sudo systemctl enable --now docker
+sudo usermod -aG docker $USER
 ```
 
 ## Optimizations

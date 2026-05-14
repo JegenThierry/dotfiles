@@ -7,7 +7,7 @@ The following dotfiles are for a fresh install of EndeavourOS Linux with the KDE
 Ensure you have all updates installed
 
 ```bash
-yay -Syyu
+yay
 ```
 
 Reboot your PC if any updates have been installed.
@@ -17,7 +17,28 @@ Reboot your PC if any updates have been installed.
 **AUR + Pacman:**
 
 ```bash
-yay -S zsh flatpak gcc make git ripgrep fd unzip neovim dotnet-sdk luarocks fzf docker docker-compose steam curl brave-bin zsh-syntax-highlighting zsh-autosuggestions zsh-you-should-use bat
+yay -S \
+  zsh \
+  ghostty \
+  flatpak \
+  gcc \
+  make \
+  git \
+  rsync \
+  rclone \
+  ripgrep \
+  fd \
+  unzip \
+  neovim \
+  dotnet-sdk \
+  luarocks \
+  fzf \
+  docker \
+  docker-compose \
+  steam \
+  curl \
+  brave-bin \
+  bat
 ```
 
 **Flatpaks:**
@@ -106,6 +127,7 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 git clone https://github.com/MichaelAquilina/zsh-you-should-use.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/you-should-use
 ```
 
+
 **Kickstart nvim config:**
 
 ```bash
@@ -138,6 +160,13 @@ git clone ssh://git@codeberg.org/thierryjegen/playgrounds.git
 git clone ssh://git@codeberg.org/thierryjegen/tiny-emitter-cve-fixes.git
 git clone ssh://git@codeberg.org/thierryjegen/server-config.git
 git clone ssh://git@codeberg.org/thierryjegen/budget-planner.git
+```
+
+## Docker
+
+```bash
+sudo systemctl enable --now docker
+sudo usermod -aG docker $USER
 ```
 
 ## Optimizations
