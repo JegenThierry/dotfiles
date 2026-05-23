@@ -1,0 +1,10 @@
+# Local environment files
+.env
+.env.*
+
+# Temporary files
+*.swp
+*~
+
+# System files
+.DS_Store

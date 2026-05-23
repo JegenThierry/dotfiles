@@ -56,7 +56,7 @@ sudo dnf swap mesa-vdpau-drivers.i686 mesa-vdpau-drivers-freeworld.i686 -y
 
 ```bash
 sudo dnf install -y \
-  zsh \
+  fish \
   flatpak \
   gcc \
   make \
@@ -74,7 +74,12 @@ sudo dnf install -y \
   docker-compose \
   steam \
   curl \
-  bat
+  bat \
+  stow \
+  starship \
+  zoxide \
+  eza \
+  gnome-tweaks
 ```
 
 **Flatpaks:**
@@ -91,7 +96,8 @@ flatpak install flathub \
   moe.launcher.the-honkers-railway-launcher \
   io.dbeaver.DBeaverCommunity \
   com.usebruno.Bruno \
-  org.signal.Signal
+  org.signal.Signal \
+  com.mattjakeman.ExtensionManager
 ```
 
 **Zed:**
@@ -100,11 +106,13 @@ flatpak install flathub \
 curl -f https://zed.dev/install.sh | sh
 ```
 
-**Node Version Manager:**
+**fnm (Node version manager — fish-native, replaces NVM):**
 
 ```bash
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash
+curl -fsSL https://fnm.vercel.app/install | bash -s -- --install-dir "$HOME/.local/bin" --skip-shell
 ```
+
+`config.fish` initializes it with `fnm env --use-on-cd --shell fish | source`, so `.nvmrc` files auto-switch on `cd`.
 
 **Jetbrains Toolbox: (Note: the provided version may be outdated)**
 
@@ -149,32 +157,29 @@ cd
 
 ## Configurations
 
-**Oh my Zsh:**
+**Fisher (fish plugin manager):**
 
 ```bash
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+fish -c 'curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher'
 ```
 
-**Installing Plugins**
+Plugins are declared in `fish/.config/fish/fish_plugins`. After stowing, `fisher update` installs them:
 
 ```bash
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-git clone https://github.com/MichaelAquilina/zsh-you-should-use.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/you-should-use
+fish -c 'fisher update'
 ```
 
+**Set fish as the default login shell:**
+
+```bash
+echo "$(command -v fish)" | sudo tee -a /etc/shells
+chsh -s "$(command -v fish)"
+```
 
 **Kickstart nvim config:**
 
 ```bash
 git clone https://github.com/nvim-lua/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
-```
-
-**Add NVM to .zshrc:**
-
-```bash
-echo 'export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"' >> ~/.zshrc && \
-echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm' >> ~/.zshrc
 ```
 
 **SSH Keys:**
