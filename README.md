@@ -1,59 +1,159 @@
-# Dotfiles for Arch (EndeavourOS)
+# Setup Arch (EndeavourOS)
 
-This repository contains my personal dotfiles and a setup script for a fresh install of EndeavourOS Linux with the KDE desktop.
+The following dotfiles are for a fresh install of EndeavourOS Linux with the KDE desktop. Do note this is my personal way of configuring EndeavourOS and may differ from your personal preferences.
 
-## Quick Start
+## Update
 
-To set up a new machine, clone this repository and run the setup script:
+Ensure you have all updates installed
 
 ```bash
-git clone https://github.com/thierryjegen/dotfiles.git ~/dotfiles
-cd ~/dotfiles
-chmod +x setup.sh
-./setup.sh
+yay
 ```
 
-### What the script does:
-1.  **System Update:** Runs `yay -Syu`.
-2.  **Package Installation:** Installs core packages (fish, fnm, neovim, etc.) via pacman/AUR.
-3.  **Modern CLI Tools:** Installs `starship`, `zoxide`, `eza`, `bat`.
-4.  **Flatpaks:** Installs a predefined list of Flatpak applications.
-5.  **Extra Tools:** Installs Zed and JetBrains Toolbox.
-6.  **Fonts:** Installs JetBrainsMono and FiraCode Nerd Fonts.
-7.  **Appearance:** Installs Colloid icon and cursor themes.
-8.  **Editor:** Clones the Kickstart Neovim configuration.
-9.  **Automation:** Symlinks dotfiles using **GNU Stow**.
-10. **Shell:** Installs [Fisher](https://github.com/jorgebucaran/fisher), syncs plugins from `fish/.config/fish/fish_plugins`, and sets fish as the default login shell.
-11. **Docker:** Enables and configures Docker for the current user.
-12. **Optimizations:** Disables `NetworkManager-wait-online.service`.
+Reboot your PC if any updates have been installed.
 
-## Repository Structure
+## Installing Software
 
-Managed with [GNU Stow](https://www.gnu.org/software/stow/):
-
-- `fish/`: Fish shell configuration (`config.fish`, `fish_plugins`)
-- `zed/`: Zed editor settings
-- `git/`: Global git configuration and ignore files
-- `ssh/`: SSH client configuration
-
-## Post-Installation
-
-### SSH Keys
-
-Ensure your SSH keys are in `~/.ssh` and have the correct permissions:
+**AUR + Pacman:**
 
 ```bash
-chmod 600 ~/.ssh/key1 ~/.ssh/key2
-chmod 644 ~/.ssh/key1.pub ~/.ssh/key2.pub
+yay -S \
+  zsh \
+  ghostty \
+  flatpak \
+  gcc \
+  make \
+  git \
+  rsync \
+  rclone \
+  ripgrep \
+  fd \
+  unzip \
+  neovim \
+  dotnet-sdk \
+  luarocks \
+  fzf \
+  docker \
+  docker-compose \
+  steam \
+  curl \
+  brave-bin \
+  bat
 ```
 
-### Clone Projects
-
-Once SSH is configured, you can clone your development projects:
+**Flatpaks:**
 
 ```bash
-mkdir -p ~/Documents/programming
-cd ~/Documents/programming
+flatpak install flathub \
+  com.discordapp.Discord \
+  com.github.tchx84.Flatseal \
+  org.remmina.Remmina \
+  md.obsidian.Obsidian \
+  com.usebottles.bottles \
+  com.spotify.Client \
+  org.mozilla.Thunderbird \
+  moe.launcher.the-honkers-railway-launcher \
+  io.dbeaver.DBeaverCommunity \
+  com.usebruno.Bruno \
+  org.signal.Signal
+```
+
+**Zed:**
+
+```bash
+curl -f https://zed.dev/install.sh | sh
+```
+
+**Node Version Manager:**
+
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash
+```
+
+**Jetbrains Toolbox: (Note: the provided version may be outdated)**
+
+```bash
+mkdir ~/Applications
+cd ~/Applications
+curl -L "https://download.jetbrains.com/toolbox/jetbrains-toolbox-3.2.0.65851.tar.gz" -o "jetbrains-toolbox.tar.gz"
+tar -xzf ./jetbrains-toolbox.tar.gz
+rm ./jetbrains-toolbox.tar.gz
+```
+
+## Fonts
+
+Download and extract `JetBrainsMono` and `FiraCode`:
+
+```bash
+mkdir ~/.fonts
+cd ~/.fonts
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/JetBrainsMono.zip
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/FiraCode.zip
+unzip ./JetBrainsMono.zip
+unzip ./FiraCode.zip
+rm ./*.zip
+cd
+```
+
+## Icons and Cursors
+
+Using the colloid-icon-theme:
+
+```bash
+cd ~/Downloads
+git clone https://github.com/vinceliuice/Colloid-icon-theme.git && \
+cd Colloid-icon-theme && \
+./install.sh && \
+cd cursors && \
+./install.sh
+cd ~/Downloads
+sudo rm -R ./Colloid-icon-theme
+cd
+```
+
+## Configurations
+
+**Oh my Zsh:**
+
+```bash
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
+
+**Installing Plugins**
+
+```bash
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+git clone https://github.com/MichaelAquilina/zsh-you-should-use.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/you-should-use
+```
+
+
+**Kickstart nvim config:**
+
+```bash
+git clone https://github.com/nvim-lua/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
+```
+
+**Add NVM to .zshrc:**
+
+```bash
+echo 'export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"' >> ~/.zshrc && \
+echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm' >> ~/.zshrc
+```
+
+**SSH Keys:**
+
+```bash
+chmod 600 key1 key2
+chmod 644 key1.pub key2.pub
+```
+
+Once the keys are setup you can clone all the projects:
+
+```bash
+cd ~/Documents
+mkdir programming
+cd programming
 git clone ssh://git@codeberg.org/thierryjegen/docker-containers.git
 git clone ssh://git@codeberg.org/thierryjegen/proton-auth-converter.git
 git clone ssh://git@codeberg.org/thierryjegen/playgrounds.git
@@ -62,9 +162,15 @@ git clone ssh://git@codeberg.org/thierryjegen/server-config.git
 git clone ssh://git@codeberg.org/thierryjegen/budget-planner.git
 ```
 
-## Other distros
+## Docker
 
-The `old/` directory holds setup scripts for other systems I use on and off:
+```bash
+sudo systemctl enable --now docker
+sudo usermod -aG docker $USER
+```
 
-- `old/fedora/` — Fedora (GNOME). Kept in sync with this Arch setup where it makes sense; differences are intentional (RPM Fusion, multimedia codec swaps, `gnome-tweaks`, `com.mattjakeman.ExtensionManager`, gaming-prompt-gated `steam`/`bottles`/i686 mesa swaps).
-- `old/pop-os/`, `old/windows/` — older, not actively maintained.
+## Optimizations
+
+```bash
+sudo systemctl disable NetworkManager-wait-online.service
+```

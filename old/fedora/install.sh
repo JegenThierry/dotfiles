@@ -22,41 +22,13 @@ sudo dnf upgrade -y
 
 # Install required programs
 echo "Installing essential programs..."
-PKGS=(
-    fish
-    flatpak
-    gcc
-    make
-    git
-    rsync
-    rclone
-    ripgrep
-    fd
-    unzip
-    neovim
-    dotnet-sdk-8.0
-    luarocks
-    fzf
-    docker
-    docker-compose
-    curl
-    bat
-    stow
-    starship
-    zoxide
-    eza
-    gnome-tweaks
-    shotwell
-    cabextract
-    xorg-x11-font-utils
-    fontconfig
-)
+PKGS=(git curl vim zsh unzip flatpak gnome-tweaks gcc make ripgrep fd unzip neovim fzf shotwell dotnet-sdk-8.0 luarocks docker docker-compose curl cabextract xorg-x11-font-utils fontconfig)
 
 if [[ "$gaming_choice" == "y" ]]; then
   PKGS+=(steam)
 fi
 
-sudo dnf install -y "${PKGS[@]}"
+sudo dnf install --skip-unavailable -y "${PKGS[@]}"
 
 # Ensure Flathub is configured
 echo "Ensuring Flathub is available"
@@ -64,21 +36,10 @@ flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.f
 
 # Install Flatpak programs
 echo "Installing Flatpak programs..."
-FLATPAKS=(
-    com.discordapp.Discord
-    com.github.tchx84.Flatseal
-    org.remmina.Remmina
-    md.obsidian.Obsidian
-    com.spotify.Client
-    org.mozilla.Thunderbird
-    io.dbeaver.DBeaverCommunity
-    com.usebruno.Bruno
-    org.signal.Signal
-    com.mattjakeman.ExtensionManager
-)
+FLATPAKS=(com.discordapp.Discord org.telegram.desktop com.github.tchx84.Flatseal org.remmina.Remmina md.obsidian.Obsidian com.mattjakeman.ExtensionManager)
 
 if [[ "$gaming_choice" == "y" ]]; then
-  FLATPAKS+=(com.usebottles.bottles moe.launcher.the-honkers-railway-launcher)
+  FLATPAKS+=(com.usebottles.bottles)
 fi
 
 flatpak install -y "${FLATPAKS[@]}"
@@ -116,17 +77,27 @@ if [[ "$gaming_choice" == "y" ]]; then
   sudo dnf swap -y mesa-vdpau-drivers.i686 mesa-vdpau-drivers-freeworld.i686
 fi
 
-# Install fnm (not in default Fedora repos; use the official installer into ~/.local/bin)
-if ! command -v fnm &> /dev/null; then
-    echo "Installing fnm..."
-    curl -fsSL https://fnm.vercel.app/install | bash -s -- --install-dir "$HOME/.local/bin" --skip-shell
-fi
+# Install Oh My Zsh
+echo "Installing Oh My Zsh..."
 
-# Setup Neovim (Kickstart)
-if [ ! -d "$HOME/.config/nvim" ]; then
-    echo "Setting up Neovim configuration..."
-    git clone https://github.com/nvim-lua/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
-fi
+export RUNZSH=no
+export CHSH=no
+export KEEP_ZSHRC=yes
+
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+unset RUNZSH
+unset CHSH
+unset KEEP_ZSHRC
+
+# Install NVM
+echo "Installing Node Version Manager (NVM)..."
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+
+# Add NVM to .zshrc
+echo "Adding NVM to .zshrc..."
+echo 'export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"' >> ~/.zshrc
+echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> ~/.zshrc
 
 # Install Colloid icons and cursors
 echo "Installing Colloid icon theme and cursors..."
@@ -136,50 +107,19 @@ cd cursors && ./install.sh
 cd ~ && rm -rf Colloid-icon-theme
 
 echo "Installing Catppuccin GTK-Theme"
-if [ ! -d ~/Downloads/Catppuccin-GTK-Theme ]; then
-    git clone https://github.com/Fausto-Korpsvart/Catppuccin-GTK-Theme.git ~/Downloads/Catppuccin-GTK-Theme
-    (cd ~/Downloads/Catppuccin-GTK-Theme/themes && ./install.sh)
-fi
+cd ~/Downloads
+git clone https://github.com/Fausto-Korpsvart/Catppuccin-GTK-Theme.git
+cd Catppuccin-GTK-Theme
+cd themes
+./install.sh
 
 echo "Installing Zed"
-if ! command -v zed &> /dev/null; then
-    curl -f https://zed.dev/install.sh | sh
-fi
+curl -f https://zed.dev/install.sh | sh
 
-echo "Installing JetBrains Toolbox (via Flatpak)"
-flatpak install -y flathub com.jetbrains.JetBrains-Toolbox
-
-# Docker configuration
-echo "Configuring Docker..."
-sudo systemctl enable --now docker
-sudo usermod -aG docker "$USER"
-
-# Optimizations
-echo "Applying optimizations..."
-sudo systemctl disable NetworkManager-wait-online.service
-sudo rm -f /etc/xdg/autostart/org.gnome.Software.desktop
-
-# Symlink dotfiles using Stow (must run before Fisher so fish_plugins is in place)
-echo "Symlinking dotfiles with GNU Stow..."
-REPO_DIR="$(cd "$(dirname "$0")/../.." && pwd)"
-(cd "$REPO_DIR" && stow fish ssh zed git)
-
-# Install Fisher and sync plugins from fish_plugins
-if ! fish -c 'functions -q fisher' 2>/dev/null; then
-    echo "Installing Fisher..."
-    fish -c 'curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher'
-fi
-echo "Syncing Fisher plugins from fish_plugins..."
-fish -c 'fisher update'
-
-# Make fish the default login shell
-FISH_BIN="$(command -v fish)"
-if ! grep -qx "$FISH_BIN" /etc/shells; then
-    echo "$FISH_BIN" | sudo tee -a /etc/shells > /dev/null
-fi
-if [ "$SHELL" != "$FISH_BIN" ]; then
-    echo "Setting fish as default shell..."
-    chsh -s "$FISH_BIN"
-fi
+echo "Installing JetBrainsToolbox"
+cd ~/Downloads
+wget -q https://download.jetbrains.com/toolbox/jetbrains-toolbox-2.5.4.38621.tar.gz
+tar -xf ./jetbrains-toolbox-2.5.4.38621.tar.gz
+./jetbrains-toolbox-2.5.4.38621/jetbrains-toolbox
 
 echo "Installation complete! Please reboot your system."
