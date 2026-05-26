@@ -159,7 +159,7 @@ git clone ssh://git@codeberg.org/thierryjegen/proton-auth-converter.git
 git clone ssh://git@codeberg.org/thierryjegen/playgrounds.git
 git clone ssh://git@codeberg.org/thierryjegen/tiny-emitter-cve-fixes.git
 git clone ssh://git@codeberg.org/thierryjegen/server-config.git
-git clone ssh://git@codeberg.org/thierryjegen/budget-planner.git
+git clone ssh://git@codeberg.org/thierryjegen/centsible.git
 ```
 
 ## Docker
