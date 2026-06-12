@@ -1,47 +1,115 @@
-# Setup Arch (EndeavourOS)
+# Dotfiles Fedora
 
-The following dotfiles are for a fresh install of EndeavourOS Linux with the KDE desktop. Do note this is my personal way of configuring EndeavourOS and may differ from your personal preferences.
+The following dotfiles are for a fresh install of Fedora Linux with the default Gnome desktop. Do note this is my personal way of configuring fedora and may differ from your personal preferences.
 
-## Update
+## Cleanup
 
-Ensure you have all updates installed
+Uninstall the following programs with the following command:
 
 ```bash
-yay
+sudo dnf remove -y \
+  gnome-tour \
+  mediawriter \
+  yelp
 ```
 
-Reboot your PC if any updates have been installed.
+## Before continuing some initial Setup is required:
+
+**Setup RPM Fusion:**
+
+```bash
+sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+```
+
+**Updates:**
+
+```bash
+sudo dnf group update core -y
+sudo dnf4 group install core -y
+sudo dnf update -y
+```
+
+> It is recommended to reboot now.
+
+**Updating Firmware:**
+
+```bash
+fwupdmgr refresh --force
+fwupdmgr get-devices # Lists devices with available updates.
+fwupdmgr get-updates # Fetches list of available updates.
+fwupdmgr update
+```
+
+**Installing Video Codecs and Acceleration:**
+
+```bash
+sudo dnf4 group install multimedia -y
+sudo dnf swap 'ffmpeg-free' 'ffmpeg' --allowerasing -y
+sudo dnf update @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin -y
+sudo dnf group install -y sound-and-video
+sudo dnf install ffmpeg-libs libva libva-utils -y
+sudo dnf install mesa-va-drivers-freeworld -y
+sudo dnf install mesa-va-drivers-freeworld.i686 -y
+sudo dnf install openh264 gstreamer1-plugin-openh264 mozilla-openh264 -y
+sudo dnf config-manager setopt fedora-cisco-openh264.enabled=1
+```
 
 ## Installing Software
 
-**AUR + Pacman:**
+**Software Packages (Without Gaming):**
 
 ```bash
-yay -S \
+sudo dnf install -y \
   zsh \
-  ghostty \
   flatpak \
   gcc \
   make \
   git \
-  rsync \
-  rclone \
   ripgrep \
   fd \
   unzip \
   neovim \
-  dotnet-sdk \
+  dotnet-sdk-10.0 \
+  luarocks \
+  fzf \
+  docker \
+  docker-compose \
+  curl \
+  7zip \
+  shotwell \
+  gnome-tweaks \
+  thunderbird \
+  nextcloud-client
+```
+
+**Software Packages (With Gaming):**
+
+```bash
+sudo dnf install -y \
+  zsh \
+  flatpak \
+  gcc \
+  make \
+  git \
+  ripgrep \
+  fd \
+  unzip \
+  neovim \
+  dotnet-sdk-10.0 \
   luarocks \
   fzf \
   docker \
   docker-compose \
   steam \
   curl \
-  brave-bin \
-  bat
+  7zip \
+  shotwell \
+  gnome-tweaks \
+  thunderbird \
+  nextcloud-client
 ```
 
-**Flatpaks:**
+**Flatpaks (With Gaming):**
 
 ```bash
 flatpak install flathub \
@@ -51,11 +119,28 @@ flatpak install flathub \
   md.obsidian.Obsidian \
   com.usebottles.bottles \
   com.spotify.Client \
-  org.mozilla.Thunderbird \
   moe.launcher.the-honkers-railway-launcher \
   io.dbeaver.DBeaverCommunity \
   com.usebruno.Bruno \
-  org.signal.Signal
+  org.signal.Signal \
+  app.zen_browser.zen \
+  com.mattjakeman.ExtensionManager
+```
+
+**Flatpaks (Without Gaming):**
+
+```bash
+flatpak install flathub \
+  com.discordapp.Discord \
+  com.github.tchx84.Flatseal \
+  org.remmina.Remmina \
+  md.obsidian.Obsidian \
+  com.spotify.Client \
+  io.dbeaver.DBeaverCommunity \
+  com.usebruno.Bruno \
+  org.signal.Signal \
+  app.zen_browser.zen \
+  com.mattjakeman.ExtensionManager
 ```
 
 **Zed:**
@@ -127,7 +212,6 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 git clone https://github.com/MichaelAquilina/zsh-you-should-use.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/you-should-use
 ```
 
-
 **Kickstart nvim config:**
 
 ```bash
@@ -172,5 +256,6 @@ sudo usermod -aG docker $USER
 ## Optimizations
 
 ```bash
-sudo systemctl disable NetworkManager-wait-online.service
+sudo systemctl disable NetworkManager-wait-online.service # Disable NetworkManager-wait-online.service
+sudo rm /etc/xdg/autostart/org.gnome.Software.desktop # Disable GNOME-Software
 ```
