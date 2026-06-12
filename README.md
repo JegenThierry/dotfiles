@@ -1,6 +1,6 @@
 # Dotfiles Fedora
 
-The following dotfiles are for a fresh install of Fedora Linux with the default Gnome desktop. Do note this is my personal way of configuring fedora and may differ from your personal preferences.
+The following dotfiles are for a fresh install of Fedora Linux with the default GNOME desktop. Do note this is my personal way of configuring Fedora and may differ from your personal preferences.
 
 ## Cleanup
 
@@ -13,9 +13,9 @@ sudo dnf remove -y \
   yelp
 ```
 
-## Before continuing some initial Setup is required:
+## Before continuing, some initial setup is required:
 
-**Setup RPM Fusion:**
+**Set up RPM Fusion:**
 
 ```bash
 sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
@@ -155,7 +155,7 @@ curl -f https://zed.dev/install.sh | sh
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash
 ```
 
-**Jetbrains Toolbox: (Note: the provided version may be outdated)**
+**JetBrains Toolbox: (Note: the provided version may be outdated)**
 
 ```bash
 mkdir ~/Applications
@@ -167,7 +167,7 @@ rm ./jetbrains-toolbox.tar.gz
 
 ## Fonts
 
-Download and extract `JetBrainsMono` and `FiraCode`:
+Download and extract `JetBrains Mono` and `Fira Code`:
 
 ```bash
 mkdir ~/.fonts
@@ -198,13 +198,13 @@ cd
 
 ## Configurations
 
-**Oh my Zsh:**
+**Oh My Zsh:**
 
 ```bash
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
-**Installing Plugins**
+**Installing Plugins:**
 
 ```bash
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
@@ -232,7 +232,7 @@ chmod 600 key1 key2
 chmod 644 key1.pub key2.pub
 ```
 
-Once the keys are setup you can clone all the projects:
+Once the keys are set up you can clone all the projects:
 
 ```bash
 cd ~/Documents
@@ -256,6 +256,6 @@ sudo usermod -aG docker $USER
 ## Optimizations
 
 ```bash
-sudo systemctl disable NetworkManager-wait-online.service # Disable NetworkManager-wait-online.service
-sudo rm /etc/xdg/autostart/org.gnome.Software.desktop # Disable GNOME-Software
+sudo systemctl disable NetworkManager-wait-online.service
+sudo rm /etc/xdg/autostart/org.gnome.Software.desktop
 ```
