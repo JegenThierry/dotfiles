@@ -109,6 +109,22 @@ sudo dnf install -y \
   nextcloud-client
 ```
 
+**Flatpaks (Without Gaming):**
+
+```bash
+flatpak install flathub \
+  com.discordapp.Discord \
+  com.github.tchx84.Flatseal \
+  org.remmina.Remmina \
+  md.obsidian.Obsidian \
+  com.spotify.Client \
+  io.dbeaver.DBeaverCommunity \
+  com.usebruno.Bruno \
+  org.signal.Signal \
+  app.zen_browser.zen \
+  com.mattjakeman.ExtensionManager
+```
+
 **Flatpaks (With Gaming):**
 
 ```bash
@@ -120,22 +136,6 @@ flatpak install flathub \
   com.usebottles.bottles \
   com.spotify.Client \
   moe.launcher.the-honkers-railway-launcher \
-  io.dbeaver.DBeaverCommunity \
-  com.usebruno.Bruno \
-  org.signal.Signal \
-  app.zen_browser.zen \
-  com.mattjakeman.ExtensionManager
-```
-
-**Flatpaks (Without Gaming):**
-
-```bash
-flatpak install flathub \
-  com.discordapp.Discord \
-  com.github.tchx84.Flatseal \
-  org.remmina.Remmina \
-  md.obsidian.Obsidian \
-  com.spotify.Client \
   io.dbeaver.DBeaverCommunity \
   com.usebruno.Bruno \
   org.signal.Signal \
