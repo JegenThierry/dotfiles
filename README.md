@@ -244,6 +244,7 @@ git clone ssh://git@codeberg.org/thierryjegen/playgrounds.git
 git clone ssh://git@codeberg.org/thierryjegen/tiny-emitter-cve-fixes.git
 git clone ssh://git@codeberg.org/thierryjegen/server-config.git
 git clone ssh://git@codeberg.org/thierryjegen/centsible.git
+git clone ssh://git@codeberg.org/thierryjegen/dotfiles.git
 ```
 
 ## Docker
