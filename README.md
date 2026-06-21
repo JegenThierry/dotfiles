@@ -64,6 +64,7 @@ sudo dnf install -y \
   flatpak \
   gcc \
   make \
+  golang \
   git \
   ripgrep \
   fd \
@@ -90,6 +91,7 @@ sudo dnf install -y \
   flatpak \
   gcc \
   make \
+  golang \
   git \
   ripgrep \
   fd \
@@ -117,11 +119,9 @@ flatpak install flathub \
   com.github.tchx84.Flatseal \
   org.remmina.Remmina \
   md.obsidian.Obsidian \
-  com.spotify.Client \
   io.dbeaver.DBeaverCommunity \
   com.usebruno.Bruno \
   org.signal.Signal \
-  app.zen_browser.zen \
   com.mattjakeman.ExtensionManager
 ```
 
@@ -134,12 +134,10 @@ flatpak install flathub \
   org.remmina.Remmina \
   md.obsidian.Obsidian \
   com.usebottles.bottles \
-  com.spotify.Client \
   moe.launcher.the-honkers-railway-launcher \
   io.dbeaver.DBeaverCommunity \
   com.usebruno.Bruno \
   org.signal.Signal \
-  app.zen_browser.zen \
   com.mattjakeman.ExtensionManager
 ```
 
@@ -251,6 +249,7 @@ git clone ssh://git@codeberg.org/thierryjegen/tiny-emitter-cve-fixes.git
 git clone ssh://git@codeberg.org/thierryjegen/server-config.git
 git clone ssh://git@codeberg.org/thierryjegen/centsible.git
 git clone ssh://git@codeberg.org/thierryjegen/dotfiles.git
+git clone ssh://git@codeberg.org/thierryjegen/ytdl-web.git
 ```
 
 ## Docker
