@@ -6,11 +6,33 @@ The following dotfiles are for a fresh install of Fedora Linux with the default 
 
 Uninstall the following programs with the following command:
 
+**(GNOME)**
+
 ```bash
 sudo dnf remove -y \
   gnome-tour \
   mediawriter \
   yelp
+```
+
+**(KDE)**
+
+```bash
+sudo dnf remove -y \
+  kmail \ 
+  korganizer \
+  kaddressbook \
+  akregator \
+  konversation \
+  neochat \
+  dragon \
+  kmines \
+  kpat \
+  mediawriter \
+  krdc \
+  krfb \
+  mediawriter \
+  kdeconnectd
 ```
 
 ## Before continuing, some initial setup is required:
@@ -78,7 +100,6 @@ sudo dnf install -y \
   curl \
   7zip \
   shotwell \
-  gnome-tweaks \
   thunderbird \
   nextcloud-client
 ```
@@ -106,7 +127,6 @@ sudo dnf install -y \
   curl \
   7zip \
   shotwell \
-  gnome-tweaks \
   thunderbird \
   nextcloud-client
 ```
@@ -121,8 +141,7 @@ flatpak install flathub \
   md.obsidian.Obsidian \
   io.dbeaver.DBeaverCommunity \
   com.usebruno.Bruno \
-  org.signal.Signal \
-  com.mattjakeman.ExtensionManager
+  org.signal.Signal 
 ```
 
 **Flatpaks (With Gaming):**
@@ -137,8 +156,7 @@ flatpak install flathub \
   moe.launcher.the-honkers-railway-launcher \
   io.dbeaver.DBeaverCommunity \
   com.usebruno.Bruno \
-  org.signal.Signal \
-  com.mattjakeman.ExtensionManager
+  org.signal.Signal 
 ```
 
 **Zed:**
