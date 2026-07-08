@@ -32,7 +32,7 @@ sudo dnf remove -y \
   krdc \
   krfb \
   mediawriter \
-  kdeconnectd
+  kdeconnectd 
 ```
 
 ## Before continuing, some initial setup is required:
@@ -101,7 +101,8 @@ sudo dnf install -y \
   7zip \
   shotwell \
   thunderbird \
-  nextcloud-client
+  nextcloud-client \
+  rsync
 ```
 
 **Software Packages (With Gaming):**
@@ -128,7 +129,8 @@ sudo dnf install -y \
   7zip \
   shotwell \
   thunderbird \
-  nextcloud-client
+  nextcloud-client \
+  rsync
 ```
 
 **Flatpaks (Without Gaming):**
