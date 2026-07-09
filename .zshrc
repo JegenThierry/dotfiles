@@ -3,9 +3,8 @@ export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="lukerandall"
 
 # SSH configuration
-zstyle :omz:plugin:ssh-agent lifetime 4h
-zstyle :omz:plugin:ssh-agent lazy yes
-zstyle :omz:plugin:ssh-agent identities id_ed25519 server_default
+zstyle :omz:plugins:ssh-agent lifetime 4h
+zstyle :omz:plugins:ssh-agent identities id_ed25519 server_default
 
 zstyle ':omz:update' mode auto
 zstyle ':omz:update' frequency 5
@@ -39,7 +38,7 @@ zstyle ':omz:update' frequency 5
 # "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
-HIST_STAMPS="dd.mm.yyyy/"
+HIST_STAMPS="dd.mm.yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -50,8 +49,8 @@ plugins=(
   fzf
   ssh-agent
   zsh-autosuggestions
-  zsh-syntax-highlighting
   you-should-use
+  zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -89,6 +88,5 @@ export FZF_DEFAULT_OPTS="
 "
 
 # Aliases
-alias ytdl='yt-dlp -f bestaudio -x --remote-components ejs:npm --audio-format flac --embed-thumbnail --add-metadata -o "%(title)s.%(ext)s"'
+alias ytdl='yt-dlp -f bestaudio -x --audio-format flac --embed-thumbnail --embed-metadata -o "%(title)s.%(ext)s"'
 alias vim='nvim'
-alias proton-sync='rclone sync "Proton Drive:" /home/thierry/ProtonDrive --progress'

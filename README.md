@@ -19,7 +19,7 @@ sudo dnf remove -y \
 
 ```bash
 sudo dnf remove -y \
-  kmail \ 
+  kmail \
   korganizer \
   kaddressbook \
   akregator \
@@ -31,7 +31,6 @@ sudo dnf remove -y \
   mediawriter \
   krdc \
   krfb \
-  mediawriter \
   kdeconnectd 
 ```
 
@@ -101,8 +100,7 @@ sudo dnf install -y \
   7zip \
   shotwell \
   thunderbird \
-  nextcloud-client \
-  rsync
+  nextcloud-client 
 ```
 
 **Software Packages (With Gaming):**
@@ -129,8 +127,7 @@ sudo dnf install -y \
   7zip \
   shotwell \
   thunderbird \
-  nextcloud-client \
-  rsync
+  nextcloud-client 
 ```
 
 **Flatpaks (Without Gaming):**
@@ -242,18 +239,11 @@ git clone https://github.com/MichaelAquilina/zsh-you-should-use.git ${ZSH_CUSTOM
 git clone https://github.com/nvim-lua/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
 ```
 
-**Add NVM to .zshrc:**
-
-```bash
-echo 'export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"' >> ~/.zshrc && \
-echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm' >> ~/.zshrc
-```
-
 **SSH Keys:**
 
 ```bash
-chmod 600 key1 key2
-chmod 644 key1.pub key2.pub
+chmod 600 id_ed25519 server_default
+chmod 644 id_ed25519.pub server_default.pub
 ```
 
 Once the keys are set up you can clone all the projects:
