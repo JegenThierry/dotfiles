@@ -31,7 +31,8 @@ sudo dnf remove -y \
   mediawriter \
   krdc \
   krfb \
-  kdeconnectd 
+  kdeconnectd \
+  plasma-discover
 ```
 
 ## Before continuing, some initial setup is required:
@@ -100,7 +101,8 @@ sudo dnf install -y \
   7zip \
   shotwell \
   thunderbird \
-  nextcloud-client 
+  nextcloud-client \
+  yt-dlp
 ```
 
 **Software Packages (With Gaming):**
@@ -127,7 +129,8 @@ sudo dnf install -y \
   7zip \
   shotwell \
   thunderbird \
-  nextcloud-client 
+  nextcloud-client \
+  yt-dlp
 ```
 
 **Flatpaks (Without Gaming):**
