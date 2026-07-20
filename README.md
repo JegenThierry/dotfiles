@@ -255,16 +255,14 @@ Once the keys are set up you can clone all the projects:
 cd ~/Documents
 mkdir programming
 cd programming
-git clone ssh://git@codeberg.org/thierryjegen/docker-containers.git
-git clone ssh://git@codeberg.org/thierryjegen/proton-auth-converter.git
-git clone ssh://git@codeberg.org/thierryjegen/playgrounds.git
-git clone ssh://git@codeberg.org/thierryjegen/tiny-emitter-cve-fixes.git
-git clone ssh://git@codeberg.org/thierryjegen/server-config.git
-git clone ssh://git@codeberg.org/thierryjegen/centsible.git
-git clone ssh://git@codeberg.org/thierryjegen/dotfiles.git
-git clone ssh://git@codeberg.org/thierryjegen/ytdl-web.git
-git clone ssh://git@codeberg.org/thierryjegen/greetings-card-creator.git
-git clone ssh://git@codeberg.org/thierryjegen/flowerly.git
+git clone git@github.com:JegenThierry/docker-containers.git
+git clone git@github.com:JegenThierry/proton-auth-converter.git
+git clone git@github.com:JegenThierry/playgrounds.git
+git clone git@github.com:JegenThierry/server-config.git
+git clone git@github.com:JegenThierry/centsible.git
+git clone git@github.com:JegenThierry/dotfiles.git
+git clone git@github.com:JegenThierry/yt-dlp-web.git
+git clone git@github.com:JegenThierry/dew-flowerly.git
 ```
 
 ## Docker
