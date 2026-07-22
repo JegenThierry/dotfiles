@@ -110,7 +110,7 @@ flatpak install flathub \
   moe.launcher.the-honkers-railway-launcher \
   io.dbeaver.DBeaverCommunity \
   com.usebruno.Bruno \
-  org.signal.Signal \ 
+  org.signal.Signal \
   com.usebottles.bottles
 ```
 
