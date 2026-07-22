@@ -8,7 +8,7 @@ I am currently Using the KDE Desktop Enviroment.
 
 Uninstall the following programs with the following command:
 
-**(KDE)**
+**KDE:**
 
 ```bash
 sudo dnf remove -y \
@@ -27,7 +27,11 @@ sudo dnf remove -y \
   kdeconnectd \
   kmahjongg \
   plasma-discover
+```
 
+**Delete dangling packages:**
+
+```bash
 sudo dnf autoremove -y
 ```
 
