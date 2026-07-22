@@ -120,6 +120,7 @@ flatpak install flathub \
   io.dbeaver.DBeaverCommunity \
   com.usebruno.Bruno \
   org.signal.Signal \
+  org.jeffvli.feishin \
   com.usebottles.bottles
 ```
 
