@@ -96,6 +96,7 @@ sudo dnf install -y \
   thunderbird \
   nextcloud-client \
   yt-dlp \
+  runc \
   steam 
 ```
 
