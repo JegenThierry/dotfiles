@@ -1,19 +1,12 @@
 # Dotfiles Fedora
 
-The following dotfiles are for a fresh install of Fedora Linux with the default GNOME desktop. Do note this is my personal way of configuring Fedora and may differ from your personal preferences.
+The following dotfiles are for a fresh install of Fedora Linux. Do note this is my personal way of configuring Fedora and may differ from your personal preferences.
+
+I am currently Using the KDE Desktop Enviroment.
 
 ## Cleanup
 
 Uninstall the following programs with the following command:
-
-**(GNOME)**
-
-```bash
-sudo dnf remove -y \
-  gnome-tour \
-  mediawriter \
-  yelp
-```
 
 **(KDE)**
 
@@ -78,7 +71,7 @@ sudo dnf config-manager setopt fedora-cisco-openh264.enabled=1
 
 ## Installing Software
 
-**Software Packages (Without Gaming):**
+**Software Packages:**
 
 ```bash
 sudo dnf install -y \
@@ -102,38 +95,11 @@ sudo dnf install -y \
   shotwell \
   thunderbird \
   nextcloud-client \
-  yt-dlp
+  yt-dlp \
+  steam 
 ```
 
-**Software Packages (With Gaming):**
-
-```bash
-sudo dnf install -y \
-  zsh \
-  flatpak \
-  gcc \
-  make \
-  golang \
-  git \
-  ripgrep \
-  fd \
-  unzip \
-  neovim \
-  dotnet-sdk-10.0 \
-  luarocks \
-  fzf \
-  docker \
-  docker-compose \
-  steam \
-  curl \
-  7zip \
-  shotwell \
-  thunderbird \
-  nextcloud-client \
-  yt-dlp
-```
-
-**Flatpaks (Without Gaming):**
+**Flatpaks:**
 
 ```bash
 flatpak install flathub \
@@ -141,30 +107,11 @@ flatpak install flathub \
   com.github.tchx84.Flatseal \
   org.remmina.Remmina \
   md.obsidian.Obsidian \
-  io.dbeaver.DBeaverCommunity \
-  com.usebruno.Bruno \
-  org.signal.Signal 
-```
-
-**Flatpaks (With Gaming):**
-
-```bash
-flatpak install flathub \
-  com.discordapp.Discord \
-  com.github.tchx84.Flatseal \
-  org.remmina.Remmina \
-  md.obsidian.Obsidian \
-  com.usebottles.bottles \
   moe.launcher.the-honkers-railway-launcher \
   io.dbeaver.DBeaverCommunity \
   com.usebruno.Bruno \
-  org.signal.Signal 
-```
-
-**Zed:**
-
-```bash
-curl -f https://zed.dev/install.sh | sh
+  org.signal.Signal \ 
+  com.usebottles.bottles
 ```
 
 **Node Version Manager:**
