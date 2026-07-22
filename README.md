@@ -105,6 +105,7 @@ sudo dnf install -y \
   yt-dlp \
   runc \
   calibre \
+  google-chrome-stable \
   steam 
 ```
 
