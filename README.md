@@ -27,6 +27,8 @@ sudo dnf remove -y \
   kdeconnectd \
   kmahjongg \
   plasma-discover
+
+sudo dnf autoremove -y
 ```
 
 ## Before continuing, some initial setup is required:
