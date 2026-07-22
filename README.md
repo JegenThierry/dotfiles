@@ -117,7 +117,7 @@ flatpak install flathub \
 **Node Version Manager:**
 
 ```bash
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.6/install.sh | bash
 ```
 
 **Deno JavaScript Engine:**
