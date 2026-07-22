@@ -131,7 +131,7 @@ curl -fsSL https://deno.land/install.sh | sh
 ```bash
 mkdir ~/Applications
 cd ~/Applications
-curl -L "https://download.jetbrains.com/toolbox/jetbrains-toolbox-3.2.0.65851.tar.gz" -o "jetbrains-toolbox.tar.gz"
+curl -L "https://download.jetbrains.com/toolbox/jetbrains-toolbox-3.6.2.85969.tar.gz" -o "jetbrains-toolbox.tar.gz"
 tar -xzf ./jetbrains-toolbox.tar.gz
 rm ./jetbrains-toolbox.tar.gz
 ```
@@ -148,22 +148,6 @@ wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/FiraCode.z
 unzip ./JetBrainsMono.zip
 unzip ./FiraCode.zip
 rm ./*.zip
-cd
-```
-
-## Icons and Cursors
-
-Using the colloid-icon-theme:
-
-```bash
-cd ~/Downloads
-git clone https://github.com/vinceliuice/Colloid-icon-theme.git && \
-cd Colloid-icon-theme && \
-./install.sh && \
-cd cursors && \
-./install.sh
-cd ~/Downloads
-sudo rm -R ./Colloid-icon-theme
 cd
 ```
 
