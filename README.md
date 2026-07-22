@@ -25,6 +25,7 @@ sudo dnf remove -y \
   krdc \
   krfb \
   kdeconnectd \
+  kmahjongg \
   plasma-discover
 ```
 
