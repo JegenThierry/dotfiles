@@ -208,5 +208,4 @@ sudo usermod -aG docker $USER
 
 ```bash
 sudo systemctl disable NetworkManager-wait-online.service
-sudo rm /etc/xdg/autostart/org.gnome.Software.desktop
 ```
