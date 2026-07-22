@@ -185,8 +185,8 @@ Once the keys are set up you can clone all the projects:
 
 ```bash
 cd ~/Documents
-mkdir programming
-cd programming
+mkdir GitHub
+cd GitHub
 git clone git@github.com:JegenThierry/docker-containers.git
 git clone git@github.com:JegenThierry/proton-auth-converter.git
 git clone git@github.com:JegenThierry/playgrounds.git
