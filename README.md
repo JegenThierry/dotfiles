@@ -229,3 +229,16 @@ sudo usermod -aG docker $USER
 ```bash
 sudo systemctl disable NetworkManager-wait-online.service
 ```
+
+## KDE Customizations
+
+> **Note:** These are personal notes on how I configure my KDE Desktop environment and may not be relevant to others. Unless specified otherwise, default settings are kept.
+
+* Accessibility > Shake Pointer > Shake pointer to find it: `False`
+* Mouse > Enable pointer acceleration: `False`
+* On-Screen Keyboard > Alternate Characters: `False`
+* Virtual Keyboard: `None`
+* Virtual Keyboard > Show Virtual Keyboard: `Never`
+* Screen Edges > Top Left > `None`
+* Window Management > Virtual Desktops > Number of Desktops: `3`
+
