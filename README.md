@@ -80,6 +80,13 @@ sudo dnf config-manager setopt fedora-cisco-openh264.enabled=1
 
 **Software Packages:**
 
+Enable Google-Chrome from the Fedora Repos:
+
+```bash
+sudo dnf config-manager setopt google-chrome.enabled=1
+```
+
+
 ```bash
 sudo dnf install -y \
   zsh \
@@ -110,6 +117,12 @@ sudo dnf install -y \
 ```
 
 **Flatpaks:**
+
+On KDE Fedora it is recommended to add the flathub remote:
+
+```bash
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+```
 
 ```bash
 flatpak install flathub \
