@@ -2,31 +2,19 @@
 
 The following dotfiles are for a fresh install of Fedora Linux. Do note this is my personal way of configuring Fedora and may differ from your personal preferences.
 
-I am currently Using the KDE Desktop Enviroment.
+I am currently using GNOME.
 
 ## Cleanup
 
 Uninstall the following programs with the following command:
 
-**KDE:**
-
 ```bash
 sudo dnf remove -y \
-  kmail \
-  korganizer \
-  kaddressbook \
-  akregator \
-  konversation \
-  neochat \
-  dragon \
-  kmines \
-  kpat \
-  mediawriter \
-  krdc \
-  krfb \
-  kdeconnectd \
-  kmahjongg \
-  plasma-discover
+  gnome-tour \
+  gnome-connections \
+  simple-scan \
+  yelp \
+  gnome-boxes
 ```
 
 **Delete dangling packages:**
@@ -242,16 +230,3 @@ sudo usermod -aG docker $USER
 ```bash
 sudo systemctl disable NetworkManager-wait-online.service
 ```
-
-## KDE Customizations
-
-> **Note:** These are personal notes on how I configure my KDE Desktop environment and may not be relevant to others. Unless specified otherwise, default settings are kept.
-
-* Accessibility > Shake Pointer > Shake pointer to find it: `False`
-* Mouse > Enable pointer acceleration: `False`
-* On-Screen Keyboard > Alternate Characters: `False`
-* Virtual Keyboard: `None`
-* Virtual Keyboard > Show Virtual Keyboard: `Never`
-* Screen Edges > Top Left > `None`
-* Window Management > Virtual Desktops > Number of Desktops: `3`
-
