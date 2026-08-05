@@ -101,6 +101,7 @@ sudo dnf install -y \
   runc \
   calibre \
   google-chrome-stable \
+  gnome-tweaks \
   steam 
 ```
 
@@ -123,6 +124,7 @@ flatpak install flathub \
   com.usebruno.Bruno \
   org.signal.Signal \
   org.jeffvli.feishin \
+  com.mattjakeman.ExtensionManager \
   com.usebottles.bottles
 ```
 
