@@ -138,6 +138,12 @@ sudo dnf check-update &&
 sudo dnf install code -y
 ```
 
+**Zed:**
+
+```bash
+curl -f https://zed.dev/install.sh | sh
+```
+
 **Node Version Manager:**
 
 ```bash
