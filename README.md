@@ -107,12 +107,6 @@ sudo dnf install -y \
 
 **Flatpaks:**
 
-On KDE Fedora it is recommended to add the flathub remote:
-
-```bash
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-```
-
 ```bash
 flatpak install flathub \
   com.discordapp.Discord \
