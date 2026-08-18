@@ -238,7 +238,7 @@ sudo systemctl disable NetworkManager-wait-online.service
 **Waydroid and dependencies:**
 
 ```bash
-sudo dnf install waydroid lzip
+sudo dnf install waydroid lzip -y
 ```
 
 **Setup GAPPS**
