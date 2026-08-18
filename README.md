@@ -232,3 +232,60 @@ sudo usermod -aG docker $USER
 ```bash
 sudo systemctl disable NetworkManager-wait-online.service
 ```
+
+## Waydroid Setup Fedora With TFT
+
+**Waydroid and dependencies:**
+
+```bash
+sudo dnf install waydroid lzip
+```
+
+**Setup GAPPS**
+
+```bash
+sudo waydroid init -s GAPPS -c https://ota.waydro.id/system -v https://ota.waydro.id/vendor -f
+```
+
+**Setup container service:**
+
+Note: I did not want to enable the service on system launch. So you can choose according to your preferences:
+
+```bash
+sudo systemctl enable --now waydroid-container.service
+sudo systemctl start waydroid-container.service
+```
+**Firewall Fixes:**
+
+```bash
+sudo firewall-cmd --zone=trusted --add-interface=waydroid0 --permanent
+sudo firewall-cmd --zone=FedoraWorkstation --add-masquerade --permanent
+sudo firewall-cmd --reload
+
+sudo sysctl net.ipv4.ip_forward=1
+
+sudo systemctl stop waydroid-container
+sudo nmcli connection delete waydroid0 2>/dev/null || true
+sudo systemctl start waydroid-container
+```
+
+**Get android ID:**
+
+```bash
+sudo python3 -c "import sqlite3; print(sqlite3.connect('/var/lib/waydroid/data/data/com.google.android.gsf/databases/gservices.db').execute('SELECT value FROM main WHERE name=\"android_id\"').fetchone()[0])"
+```
+
+Enter the ID here: https://www.google.com/android/uncertified
+
+
+**For TFT a translation Level is needed:**
+
+```bash
+git clone https://github.com/casualsnek/waydroid_script
+cd waydroid_script
+python3 -m venv venv
+venv/bin/pip install -r requirements.txt
+sudo venv/bin/python3 main.py
+```
+
+> Should you experience issues: Go to Apps > PlayStore > Clear Storage
