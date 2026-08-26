@@ -211,13 +211,12 @@ cd ~/Documents
 mkdir programming
 cd programming
 git clone ssh://git@codeberg.org/thierryjegen/docker-containers.git
-git clone ssh://git@codeberg.org/thierryjegen/proton-auth-converter.git
+git clone ssh://git@codeberg.org/thierryjegen/proton-authenticator-to-bitwarden.git
 git clone ssh://git@codeberg.org/thierryjegen/playgrounds.git
 git clone ssh://git@codeberg.org/thierryjegen/server-config.git
 git clone ssh://git@codeberg.org/thierryjegen/centsible.git
 git clone ssh://git@codeberg.org/thierryjegen/dotfiles.git
 git clone ssh://git@codeberg.org/thierryjegen/yt-dlp-web.git
-git clone ssh://git@codeberg.org/thierryjegen/dew-flowerly.git
 ```
 
 ## Docker
