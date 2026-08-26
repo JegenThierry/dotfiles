@@ -208,8 +208,8 @@ Once the keys are set up you can clone all the projects:
 
 ```bash
 cd ~/Documents
-mkdir GitHub
-cd GitHub
+mkdir programming
+cd programming
 git clone ssh://git@codeberg.org/thierryjegen/docker-containers.git
 git clone ssh://git@codeberg.org/thierryjegen/proton-auth-converter.git
 git clone ssh://git@codeberg.org/thierryjegen/playgrounds.git
