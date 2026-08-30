@@ -101,6 +101,7 @@ sudo dnf install -y \
   runc \
   calibre \
   google-chrome-stable \
+  gnome-tweaks \
   steam 
 ```
 
