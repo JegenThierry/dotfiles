@@ -14,6 +14,7 @@ sudo dnf remove -y \
   gnome-connections \
   simple-scan \
   yelp \
+  mediawriter \
   gnome-boxes
 ```
 
@@ -99,7 +100,6 @@ sudo dnf install -y \
   nextcloud-client \
   yt-dlp \
   runc \
-  calibre \
   google-chrome-stable \
   gnome-tweaks \
   steam 
@@ -158,6 +158,22 @@ cd ~/Applications
 curl -L "https://download.jetbrains.com/toolbox/jetbrains-toolbox-3.6.2.85969.tar.gz" -o "jetbrains-toolbox.tar.gz"
 tar -xzf ./jetbrains-toolbox.tar.gz
 rm ./jetbrains-toolbox.tar.gz
+```
+
+**XBOX Controller:**
+
+```bash
+sudo dnf install kernel-devel kernel-headers cabextract dkms -y
+```
+
+```bash
+git clone https://github.com/medusalix/xone.git
+cd xone
+sudo ./install.sh
+```
+
+```bash
+sudo xone-get-firmware.sh
 ```
 
 ## Fonts
