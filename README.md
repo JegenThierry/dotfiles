@@ -10,12 +10,20 @@ Uninstall the following programs with the following command:
 
 ```bash
 sudo dnf remove -y \
-  gnome-tour \
-  gnome-connections \
-  simple-scan \
-  yelp \
+  kmail \
+  korganizer \
+  kaddressbook \
+  akregator \
+  konversation \
+  neochat \
+  dragon \
+  kmines \
+  kpat \
   mediawriter \
-  gnome-boxes
+  krdc \
+  krfb \
+  kdeconnectd \
+  plasma-discover
 ```
 
 **Delete dangling packages:**
@@ -101,7 +109,6 @@ sudo dnf install -y \
   yt-dlp \
   runc \
   google-chrome-stable \
-  gnome-tweaks \
   steam 
 ```
 
@@ -118,7 +125,6 @@ flatpak install flathub \
   com.usebruno.Bruno \
   org.signal.Signal \
   org.jeffvli.feishin \
-  com.mattjakeman.ExtensionManager \
   com.usebottles.bottles
 ```
 
