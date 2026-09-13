@@ -2,7 +2,7 @@
 
 The following dotfiles are for a fresh install of Fedora Linux. Do note this is my personal way of configuring Fedora and may differ from your personal preferences.
 
-I am currently using GNOME.
+I am currently using KDE. 
 
 ## Cleanup
 
@@ -109,6 +109,8 @@ sudo dnf install -y \
   yt-dlp \
   runc \
   google-chrome-stable \
+  kitty \
+  mpv \
   steam 
 ```
 
@@ -128,16 +130,6 @@ flatpak install flathub \
   com.usebottles.bottles
 ```
 
-**VS Code:**
-
-```bash
-sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc &&
-echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null
-
-sudo dnf check-update &&
-sudo dnf install code -y
-```
-
 **Zed:**
 
 ```bash
@@ -148,12 +140,6 @@ curl -f https://zed.dev/install.sh | sh
 
 ```bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.6/install.sh | bash
-```
-
-**Deno JavaScript Engine:**
-
-```bash
-curl -fsSL https://deno.land/install.sh | sh
 ```
 
 **JetBrains Toolbox: (Note: the provided version may be outdated)**
@@ -173,6 +159,7 @@ sudo dnf install kernel-devel kernel-headers cabextract dkms -y
 ```
 
 ```bash
+cd ~/Documents
 git clone https://github.com/medusalix/xone.git
 cd xone
 sudo ./install.sh
