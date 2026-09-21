@@ -9,39 +9,8 @@ zstyle :omz:plugins:ssh-agent identities id_ed25519 server_default
 zstyle ':omz:update' mode auto
 zstyle ':omz:update' frequency 5
 
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# You can also set it to another string to have that shown instead of the default red dots.
-# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
-# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
+# Date format
 HIST_STAMPS="dd.mm.yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
 
 # Plugins
 plugins=(
@@ -70,21 +39,20 @@ export PATH=$HOME/.local/bin:$PATH
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
-export FZF_DEFAULT_OPTS="
-  --height=60%
-  --layout=reverse
-  --border=rounded
-  --margin=5%
-  --padding=1
-  --info=inline
-  --prompt='  🔍 '
-  --pointer='  '
-  --marker='✓ '
-  --header='Search Files and Commands'
-  --color='bg:-1,bg+:#313244,fg:#cdd6f4,fg+:#cdd6f4'
-  --color='hl:#f38ba8,hl+:#f38ba8,header:#585b70'
-  --color='info:#cba6f7,prompt:#bac2de,pointer:#f5e0dc'
-  --color='marker:#a6e3a1,spinner:#f5e0dc,border:#585b70'
+# fzf - One Dark Theme
+export FZF_DEFAULT_OPTS=" \
+  --border='rounded' \
+  --preview-window='border-rounded' \
+  --prompt='❯ ' \
+  --marker='❯ ' \
+  --pointer='➜ ' \
+  --separator='─' \
+  --scrollbar='│' \
+  --color='fg:#abb2bf,fg+:#ffffff,bg:#282c34,bg+:#31353f' \
+  --color='hl:#e06c75,hl+:#e5c07b,info:#61afef' \
+  --color='marker:#98c379,prompt:#61afef,spinner:#c678dd,pointer:#c678dd' \
+  --color='header:#e5c07b,border:#61afef,label:#61afef' \
+  --color='separator:#3e4451,scrollbar:#61afef' \
 "
 
 # Aliases
