@@ -77,13 +77,6 @@ sudo dnf config-manager setopt fedora-cisco-openh264.enabled=1
 
 **Software Packages:**
 
-Enable Google-Chrome from the Fedora Repos:
-
-```bash
-sudo dnf config-manager setopt google-chrome.enabled=1
-```
-
-
 ```bash
 sudo dnf install -y \
   zsh \
@@ -105,10 +98,9 @@ sudo dnf install -y \
   7zip \
   shotwell \
   thunderbird \
-  nextcloud-client \
+  rclone \
   yt-dlp \
   runc \
-  google-chrome-stable \
   kitty \
   mpv \
   steam 
