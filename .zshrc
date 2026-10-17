@@ -58,3 +58,5 @@ export FZF_DEFAULT_OPTS=" \
 # Aliases
 alias ytdl='yt-dlp -f bestaudio -x --audio-format flac --embed-thumbnail --embed-metadata -o "%(title)s.%(ext)s"'
 alias vim='nvim'
+alias proton-sync='rclone sync protondrive: /home/thierry/ProtonDrive --progress'
+
