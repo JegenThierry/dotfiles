@@ -208,10 +208,12 @@ cd ~/.fonts
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/JetBrainsMono.zip
 wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/FiraCode.zip
 unzip ./JetBrainsMono.zip
+rm README.md OFL.txt LICENSE
 unzip ./FiraCode.zip
-rm ./*.zip
-cd
+rm ./*.zip README.md OFL.txt LICENSE
 ```
+
+You may safely ignore that one of those files hast not been found for deletion: `README.md` `OFL.txt` `LICENSE`
 
 ## Configurations
 
