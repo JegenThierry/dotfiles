@@ -90,7 +90,7 @@ sudo dnf update -y
 
 > It is recommended to reboot now.
 
-**Updating Firmware:**
+**Updating Firmware (optional):**
 
 ```bash
 fwupdmgr refresh --force
@@ -115,7 +115,6 @@ sudo dnf install -y \
   fd \
   unzip \
   neovim \
-  dotnet-sdk-10.0 \
   luarocks \
   fzf \
   docker \
@@ -144,14 +143,16 @@ flatpak install flathub \
   io.dbeaver.DBeaverCommunity \
   com.usebruno.Bruno \
   org.signal.Signal \
-  org.jeffvli.feishin \
   com.usebottles.bottles
 ```
 
-**Zed:**
+**Helium Browser:**
+
+Note: I used the copr variant if you do not like that you may use a different installation method or simply use a different browser.
 
 ```bash
-curl -f https://zed.dev/install.sh | sh
+dnf copr enable imput/helium
+dnf install helium-bin
 ```
 
 **VS Code:**
@@ -234,6 +235,19 @@ git clone https://github.com/MichaelAquilina/zsh-you-should-use.git ${ZSH_CUSTOM
 git clone https://github.com/nvim-lua/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
 ```
 
+**Colloid Icon-Theme:**
+
+```bash
+cd ~/Downloads
+git clone https://github.com/vinceliuice/Colloid-icon-theme.git
+cd Colloid-icon-theme
+./install.sh
+cd cursors
+./install.sh
+cd ~/Downloads
+rm -rf Colloid-icon-theme
+```
+
 **SSH Keys:**
 
 ```bash
@@ -254,6 +268,7 @@ git clone ssh://git@codeberg.org/thierryjegen/server-config.git
 git clone ssh://git@codeberg.org/thierryjegen/centsible.git
 git clone ssh://git@codeberg.org/thierryjegen/dotfiles.git
 git clone ssh://git@codeberg.org/thierryjegen/yt-dlp-web.git
+git clone ssh://git@codeberg.org/thierryjegen/personal-homepage.git
 ```
 
 ## Docker
