@@ -34,10 +34,50 @@ sudo dnf autoremove -y
 
 ## Before continuing, some initial setup is required:
 
-**Set up RPM Fusion:**
+**RPM Fusion:**
+
+Follow the instructions on: [rpmfusion.org](https://rpmfusion.org/Configuration)
 
 ```bash
-sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm 
+```
+
+```bash
+sudo dnf config-manager setopt fedora-cisco-openh264.enabled=1
+```
+
+```bash
+sudo dnf update @core
+sudo dnf install rpmfusion-\*-appstream-data
+```
+
+**Multimedia codecs (AMD only):**
+
+Follow the instructions on: [rpmfusion.org](https://rpmfusion.org/Howto/Multimedia)
+
+```bash
+sudo dnf swap ffmpeg-free ffmpeg --allowerasing
+```
+
+```bash
+sudo dnf install @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
+```
+
+```bash
+sudo dnf install mesa-va-drivers-freeworld
+sudo dnf swap mesa-vulkan-drivers{,-freeworld}
+sudo dnf install mesa-va-drivers-freeworld.i686
+sudo dnf swap mesa-vulkan-drivers{,-freeworld}.i686
+```
+
+```bash
+sudo dnf install rpmfusion-free-release-tainted
+sudo dnf install libdvdcss
+```
+
+```bash
+sudo dnf install rpmfusion-nonfree-release-tainted
+sudo dnf --repo=rpmfusion-nonfree-tainted install "*-firmware"
 ```
 
 **Updates:**
@@ -57,20 +97,6 @@ fwupdmgr refresh --force
 fwupdmgr get-devices # Lists devices with available updates.
 fwupdmgr get-updates # Fetches list of available updates.
 fwupdmgr update
-```
-
-**Installing Video Codecs and Acceleration:**
-
-```bash
-sudo dnf4 group install multimedia -y
-sudo dnf swap 'ffmpeg-free' 'ffmpeg' --allowerasing -y
-sudo dnf update @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin -y
-sudo dnf group install -y sound-and-video
-sudo dnf install ffmpeg-libs libva libva-utils -y
-sudo dnf install mesa-va-drivers-freeworld -y
-sudo dnf install mesa-va-drivers-freeworld.i686 -y
-sudo dnf install openh264 gstreamer1-plugin-openh264 mozilla-openh264 -y
-sudo dnf config-manager setopt fedora-cisco-openh264.enabled=1
 ```
 
 ## Installing Software
