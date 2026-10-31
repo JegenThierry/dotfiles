@@ -176,7 +176,7 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.8/install.sh | bash
 ```bash
 mkdir ~/Applications
 cd ~/Applications
-curl -L "https://download.jetbrains.com/toolbox/jetbrains-toolbox-3.8.1.88030.tar.gz" -o "jetbrains-toolbox.tar.gz"
+curl -L "https://download.jetbrains.com/toolbox/jetbrains-toolbox-3.9.1.89198.tar.gz" -o "jetbrains-toolbox.tar.gz"
 tar -xzf ./jetbrains-toolbox.tar.gz
 rm ./jetbrains-toolbox.tar.gz
 ```
