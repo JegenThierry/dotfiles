@@ -2,7 +2,7 @@
 
 The following dotfiles are for a fresh install of Fedora Linux. Do note this is my personal way of configuring Fedora and may differ from your personal preferences.
 
-I am currently using KDE. 
+I am currently using GNOME. 
 
 ## Cleanup
 
@@ -10,20 +10,11 @@ Uninstall the following programs with the following command:
 
 ```bash
 sudo dnf remove -y \
-  kmail \
-  korganizer \
-  kaddressbook \
-  akregator \
-  konversation \
-  neochat \
-  dragon \
-  kmines \
-  kpat \
-  mediawriter \
-  krdc \
-  krfb \
-  kdeconnectd \
-  plasma-discover
+  gnome-tour \
+  gnome-connections \
+  simple-scan \
+  yelp \
+  gnome-boxes
 ```
 
 **Delete dangling packages:**
@@ -123,11 +114,9 @@ sudo dnf install -y \
   7zip \
   shotwell \
   thunderbird \
-  rclone \
   yt-dlp \
   runc \
-  kitty \
-  mpv \
+  gnome-tweaks \
   steam 
 ```
 
