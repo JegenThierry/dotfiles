@@ -133,6 +133,10 @@ sudo dnf install -y \
 **Flatpaks:**
 
 ```bash
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+```
+
+```bash
 flatpak install flathub \
   com.discordapp.Discord \
   com.github.tchx84.Flatseal \
