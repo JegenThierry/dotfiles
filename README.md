@@ -123,7 +123,6 @@ sudo dnf install -y \
   7zip \
   shotwell \
   thunderbird \
-  rclone \
   yt-dlp \
   runc \
   kitty \
