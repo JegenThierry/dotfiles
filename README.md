@@ -180,6 +180,8 @@ curl -f https://zed.dev/install.sh | sh
 curl -fsSL https://opencode.ai/v2/install | bash
 ```
 
+Skills in the opencode folder are from: https://github.com/mattpocock/skills
+
 **Node Version Manager:**
 
 ```bash
