@@ -174,6 +174,12 @@ sudo dnf install code -y
 curl -f https://zed.dev/install.sh | sh
 ```
 
+**Opencode:**
+
+```bash
+curl -fsSL https://opencode.ai/v2/install | bash
+```
+
 **Node Version Manager:**
 
 ```bash
