@@ -274,6 +274,7 @@ git clone git@github.com:JegenThierry/centsible.git
 git clone git@github.com:JegenThierry/dotfiles.git
 git clone git@github.com:JegenThierry/yt-dlp-web.git
 git clone git@github.com:JegenThierry/personal-homepage.git
+git clone git@github.com:JegenThierry/liquid.git
 ```
 
 ## Docker
