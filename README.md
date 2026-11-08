@@ -254,19 +254,6 @@ git clone https://github.com/MichaelAquilina/zsh-you-should-use.git ${ZSH_CUSTOM
 git clone https://github.com/nvim-lua/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
 ```
 
-**Colloid Icon-Theme:**
-
-```bash
-cd ~/Downloads
-git clone https://github.com/vinceliuice/Colloid-icon-theme.git
-cd Colloid-icon-theme
-./install.sh
-cd cursors
-./install.sh
-cd ~/Downloads
-rm -rf Colloid-icon-theme
-```
-
 **SSH Keys:**
 
 ```bash
