@@ -154,8 +154,8 @@ flatpak install flathub \
 Note: I used the copr variant if you do not like that you may use a different installation method or simply use a different browser.
 
 ```bash
-dnf copr enable imput/helium
-dnf install helium-bin
+sudo dnf copr enable imput/helium
+sudo dnf install helium-bin
 ```
 
 **VS Code:**
