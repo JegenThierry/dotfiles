@@ -39,7 +39,7 @@ sudo dnf autoremove -y
 Follow the instructions on: [rpmfusion.org](https://rpmfusion.org/Configuration)
 
 ```bash
-sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm 
+sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm  -y
 ```
 
 ```bash
@@ -47,8 +47,8 @@ sudo dnf config-manager setopt fedora-cisco-openh264.enabled=1
 ```
 
 ```bash
-sudo dnf update @core
-sudo dnf install rpmfusion-\*-appstream-data
+sudo dnf update @core -y
+sudo dnf install rpmfusion-\*-appstream-data -y
 ```
 
 **Multimedia codecs (AMD only):**
@@ -56,28 +56,28 @@ sudo dnf install rpmfusion-\*-appstream-data
 Follow the instructions on: [rpmfusion.org](https://rpmfusion.org/Howto/Multimedia)
 
 ```bash
-sudo dnf swap ffmpeg-free ffmpeg --allowerasing
+sudo dnf swap ffmpeg-free ffmpeg --allowerasing -y
 ```
 
 ```bash
-sudo dnf install @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
+sudo dnf install @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin -y
 ```
 
 ```bash
-sudo dnf install mesa-va-drivers-freeworld
-sudo dnf swap mesa-vulkan-drivers{,-freeworld}
-sudo dnf install mesa-va-drivers-freeworld.i686
-sudo dnf swap mesa-vulkan-drivers{,-freeworld}.i686
+sudo dnf install mesa-va-drivers-freeworld -y
+sudo dnf swap mesa-vulkan-drivers{,-freeworld} -y
+sudo dnf install mesa-va-drivers-freeworld.i686 -y
+sudo dnf swap mesa-vulkan-drivers{,-freeworld}.i686 -y
 ```
 
 ```bash
-sudo dnf install rpmfusion-free-release-tainted
-sudo dnf install libdvdcss
+sudo dnf install rpmfusion-free-release-tainted -y
+sudo dnf install libdvdcss -y
 ```
 
 ```bash
-sudo dnf install rpmfusion-nonfree-release-tainted
-sudo dnf --repo=rpmfusion-nonfree-tainted install "*-firmware"
+sudo dnf install rpmfusion-nonfree-release-tainted -y
+sudo dnf --repo=rpmfusion-nonfree-tainted install "*-firmware" -y
 ```
 
 **Updates:**
@@ -127,6 +127,7 @@ sudo dnf install -y \
   runc \
   kitty \
   mpv \
+  nextcloud-client \
   steam 
 ```
 
@@ -154,8 +155,8 @@ flatpak install flathub \
 Note: I used the copr variant if you do not like that you may use a different installation method or simply use a different browser.
 
 ```bash
-sudo dnf copr enable imput/helium
-sudo dnf install helium-bin
+sudo dnf copr enable imput/helium -y
+sudo dnf install helium-bin -y
 ```
 
 **VS Code:**
