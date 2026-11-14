@@ -137,7 +137,8 @@ cleanup_kde() {
   section "Cleanup default KDE applications"
 
   local pkgs=(kmail korganizer kaddressbook akregator konversation neochat dragon
-              kmines kpat mediawriter krdc krfb kdeconnectd plasma-discover)
+              kmines kpat mediawriter krdc krfb kdeconnectd plasma-discover
+              kmahjongg kleopatra kmouth kdebugsettings plasma-welcome plasma-welcome-fedora)
 
   local installed=()
   for p in "${pkgs[@]}"; do
