@@ -203,7 +203,7 @@ setup_multimedia() {
 update_system() {
   section "System updates"
 
-  run sudo dnf group update core -y
+  run sudo dnf4 group update core -y
   # dnf4 is optional; @core group is already installed above, so a missing
   # dnf4 binary is not fatal
   if command -v dnf4 >/dev/null 2>&1; then
