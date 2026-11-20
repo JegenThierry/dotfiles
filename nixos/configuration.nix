@@ -83,14 +83,19 @@
 
 
   # Package setup
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+  };
+
   nixpkgs.overlays = [
     (final: prev: {
       unstable = import (fetchTarball {
         url = "https://github.com/Nixos/nixpkgs/archive/nixos-unstable.tar.gz";
       }) {
         system = prev.stdenv.hostPlatform.system;
-        config.allowUnfree = true;
+        config = {
+          allowUnfree = true;
+        };
       };
     })
   ];
@@ -114,9 +119,8 @@
     rclone
     ripgrep 
     unzip 
-    wget 
+    wget
   ];
-
 
   # Accounts ; Usersoftware
   users.users."thierry" = {
@@ -128,7 +132,7 @@
       bruno 
       chromium
       dbeaver-bin 
-      discord 
+      unstable.discord 
       obsidian 
       remmina 
       shotwell 
@@ -137,15 +141,15 @@
 
       # Development
       nodejs_26
-      opencode 
+      unstable.opencode 
       unstable.jetbrains-toolbox 
-      vscodium 
-      zed-editor 
+      unstable.vscodium 
+      unstable.zed-editor 
 
       # Media & Gaming
       mangohud 
-      protonup-qt
-      yt-dlp 
+      unstable.protonup-qt
+      unstable.yt-dlp 
     ];
   };
 
