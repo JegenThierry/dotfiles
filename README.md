@@ -1,198 +1,40 @@
-# Dotfiles Fedora
+# Dotfiles
 
-The following dotfiles are for a fresh install of Fedora Linux. Do note this is my personal way of configuring Fedora and may differ from your personal preferences.
+I have explored different Distros for myself one stable distro I always came back to was Fedora, but recently constant struggle with media playback got on my nerves. So I decided to switch again. After exploring `NIX OS` for a while I came to the conclusion that yes it is a really nice distro but does not match how I use my system, the pardim does not match how I use my Linux system. `Ubuntu` and its derivatives also did not catch my eyes, most of them ship software that is not up to date enough for my taste.
 
-I am currently using KDE. 
+That is why I landed on `Cachy OS` the defaults fit my use case quite well and I only needed smaller tweaks for the System to feel more in line with what I want of my distro. 
 
-## Cleanup
 
-Uninstall the following programs with the following command:
+## Software
 
-```bash
-sudo dnf remove -y \
-  kmail \
-  korganizer \
-  kaddressbook \
-  akregator \
-  konversation \
-  neochat \
-  dragon \
-  kmines \
-  kpat \
-  mediawriter \
-  krdc \
-  krfb \
-  kdeconnectd \
-  kmahjongg \
-  kleopatra \
-  kmouth \
-  kdebugsettings \
-  plasma-welcome \
-  plasma-welcome-fedora \
-  plasma-discover
-```
+This is a mix of gaming and development packages that I use on my machine.
 
-**Delete dangling packages:**
+**Packages:**
 
 ```bash
-sudo dnf autoremove -y
+sudo pacman -S proton-mail-bin cachyos-gaming-meta vscodium mangohud steam flatpak gcc go git ripgrep fd unzip neovim luarocks fzf docker docker-compose curl 7zip shotwell thunderbird yt-dlp runc rclone mpv opencode zed
 ```
 
-## Before continuing, some initial setup is required:
-
-**RPM Fusion:**
-
-Follow the instructions on: [rpmfusion.org](https://rpmfusion.org/Configuration)
-
-```bash
-sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm  -y
-```
-
-```bash
-sudo dnf config-manager setopt fedora-cisco-openh264.enabled=1
-```
-
-```bash
-sudo dnf update @core -y
-sudo dnf install rpmfusion-\*-appstream-data -y
-```
-
-**Multimedia codecs (AMD only):**
-
-Follow the instructions on: [rpmfusion.org](https://rpmfusion.org/Howto/Multimedia)
-
-```bash
-sudo dnf swap ffmpeg-free ffmpeg --allowerasing -y
-```
-
-```bash
-sudo dnf install @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin -y
-```
-
-```bash
-sudo dnf install mesa-va-drivers-freeworld -y
-sudo dnf swap mesa-vulkan-drivers{,-freeworld} -y
-sudo dnf install mesa-va-drivers-freeworld.i686 -y
-sudo dnf swap mesa-vulkan-drivers{,-freeworld}.i686 -y
-```
-
-```bash
-sudo dnf install rpmfusion-free-release-tainted -y
-sudo dnf install libdvdcss -y
-```
-
-```bash
-sudo dnf install rpmfusion-nonfree-release-tainted -y
-sudo dnf --repo=rpmfusion-nonfree-tainted install "*-firmware" -y
-```
-
-**Updates:**
-
-```bash
-sudo dnf group update core -y
-sudo dnf4 group install core -y
-sudo dnf update -y
-```
-
-> It is recommended to reboot now.
-
-**Updating Firmware (optional):**
-
-```bash
-fwupdmgr refresh --force
-fwupdmgr get-devices # Lists devices with available updates.
-fwupdmgr get-updates # Fetches list of available updates.
-fwupdmgr update
-```
-
-## Installing Software
-
-**Software Packages:**
-
-```bash
-sudo dnf install -y \
-  zsh \
-  flatpak \
-  gcc \
-  make \
-  golang \
-  git \
-  ripgrep \
-  fd \
-  unzip \
-  neovim \
-  luarocks \
-  fzf \
-  docker \
-  docker-compose \
-  curl \
-  7zip \
-  shotwell \
-  thunderbird \
-  yt-dlp \
-  runc \
-  kitty \
-  mpv \
-  nextcloud-client \
-  steam 
-```
+Normally I would use `kitty` as my terminal emulator but during the setup of cachy os it installed alacritty with fish shell. So I am currently exploring that.
 
 **Flatpaks:**
 
+Since I did not have the time yet to replace some flatpaks with package manager packages the list of flatpaks remains unchanged.
+
+Note this may not be necessary installing flatpak on `Arch` also pulls flathub remote.
+
 ```bash
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak remote-add --if-not-exists --user flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 ```
 
 ```bash
-flatpak install flathub \
-  com.discordapp.Discord \
-  com.github.tchx84.Flatseal \
-  org.remmina.Remmina \
-  md.obsidian.Obsidian \
-  moe.launcher.the-honkers-railway-launcher \
-  io.dbeaver.DBeaverCommunity \
-  com.usebruno.Bruno \
-  org.signal.Signal \
-  com.usebottles.bottles
+flatpak install flathub com.discordapp.Discord com.github.tchx84.Flatseal org.remmina.Remmina md.obsidian.Obsidian moe.launcher.the-honkers-railway-launcher io.dbeaver.DBeaverCommunity com.usebruno.Bruno org.signal.Signal com.usebottles.bottles
 ```
 
-**Helium Browser:**
-
-Note: I used the copr variant if you do not like that you may use a different installation method or simply use a different browser.
+If you care about modding your games [Amethyst](https://github.com/ChrisDKN/Amethyst-Mod-Manager) may be the solution for you:
 
 ```bash
-sudo dnf copr enable imput/helium -y
-sudo dnf install helium-bin -y
-```
-
-**VS Code:**
-	
-```bash
-sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc &&
-echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null
-
-sudo dnf check-update &&
-sudo dnf install code -y
-```
-
-**Zed:**
-
-```bash
-curl -f https://zed.dev/install.sh | sh
-```
-
-**Opencode:**
-
-```bash
-curl -fsSL https://opencode.ai/v2/install | bash
-```
-
-Skills in the opencode folder are from: https://github.com/mattpocock/skills
-
-**Node Version Manager:**
-
-```bash
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.8/install.sh | bash
+flatpak install --user https://chrisdkn.github.io/Amethyst-Mod-Manager/amethyst.flatpakref
 ```
 
 **JetBrains Toolbox: (Note: the provided version may be outdated)**
@@ -205,21 +47,12 @@ tar -xzf ./jetbrains-toolbox.tar.gz
 rm ./jetbrains-toolbox.tar.gz
 ```
 
-**XBOX Controller:**
+**Fish shell Plugins:**
+
+Note that `fisher` is already installed on the cachy os preset.
 
 ```bash
-sudo dnf install kernel-devel kernel-headers cabextract dkms -y
-```
-
-```bash
-cd ~/Documents
-git clone https://github.com/medusalix/xone.git
-cd xone
-sudo ./install.sh
-```
-
-```bash
-sudo xone-get-firmware.sh
+fisher install jorgebucaran/nvm.fish
 ```
 
 ## Fonts
@@ -241,31 +74,17 @@ You may safely ignore that one of those files hast not been found for deletion: 
 
 ## Configurations
 
-**Oh My Zsh:**
-
-```bash
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-```
-
-**Installing Plugins:**
-
-```bash
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-git clone https://github.com/MichaelAquilina/zsh-you-should-use.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/you-should-use
-```
-
 **Kickstart nvim config:**
 
 ```bash
-git clone https://github.com/nvim-lua/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
+git clone https://github.com/nvim-lua/kickstart.nvim.git ~/.config/nvim
 ```
 
 **SSH Keys:**
 
 ```bash
-chmod 600 id_ed25519 server_default
-chmod 644 id_ed25519.pub server_default.pub
+chmod 600 id_ed25519 server_default rs2000
+chmod 644 id_ed25519.pub server_default.pub rs2000.pub
 ```
 
 Once the keys are set up you can clone all the projects:
